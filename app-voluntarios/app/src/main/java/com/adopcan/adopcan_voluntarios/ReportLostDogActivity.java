@@ -1,11 +1,13 @@
 package com.adopcan.adopcan_voluntarios;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,8 +36,16 @@ public class ReportLostDogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_lost_dog);
     }
 
+    public void openReportMap(View view){
+        Intent intent = new Intent(this, ReportMapsActivity.class);
+        startActivity(intent);
+    }
+
 
     public void openCamera(View view) {
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, 1);
+
         captureBtn = (ImageButton) findViewById(R.id.captureButton);
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -43,6 +53,8 @@ public class ReportLostDogActivity extends AppCompatActivity {
     }
 
     public void openGalery(View v) {
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 
         startActivityForResult(

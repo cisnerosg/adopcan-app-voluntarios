@@ -51,7 +51,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="29dp"
         android:text="Selecciona la opcion que deseas realizar"
         android:layout_marginTop="8dp"
@@ -72,7 +72,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:onClick="reportLostDog"
-        android:text="DENUNCIAR PERRO PERDIDO"
+        android:text="REPORTAR PERRO PERDIDO"
         android:textColor="@color/colorHintsWhite"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
