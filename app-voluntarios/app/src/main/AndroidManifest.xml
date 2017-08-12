@@ -25,6 +25,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -49,7 +50,9 @@
             android:screenOrientation="portrait">
             android:label="@string/title_activity_report_maps">
         </activity>
-        <activity android:name=".ReportLostDogDetailsActivity"></activity>
+        <activity android:name=".ReportLostDogDetailsActivity" />
+        <activity android:name=".ListDogs" />
+        <activity android:name=".RegDogs"></activity>
     </application>
 
 </manifest>

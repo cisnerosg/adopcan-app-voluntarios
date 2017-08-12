@@ -20,4 +20,9 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ReportLostDogActivity.class);
         startActivity(intent);
     }
+
+    public void listDogs(View view){
+        Intent intent = new Intent(this, ListDogs.class);
+        startActivity(intent);
+    }
 }

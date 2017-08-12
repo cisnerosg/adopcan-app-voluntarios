@@ -36,9 +36,9 @@ public class ListDogs extends AppCompatActivity {
 
     private void initializeData(){
         dogs = new ArrayList<>();
-        dogs.add(new Dog("Emma Wilson", "23 years old", R.drawable.adopcan));
-        dogs.add(new Dog("Lavery Maiss", "25 years old", R.drawable.dog));
-        dogs.add(new Dog("Lillie Watts", "35 years old", R.drawable.perro));
+        dogs.add(new Dog("Emma", "3 años", R.drawable.dog));
+        dogs.add(new Dog("Lavery", "5 años", R.drawable.dog));
+        dogs.add(new Dog("Lillie", "5 años", R.drawable.dog));
     }
 
     private void initializeAdapter(){
