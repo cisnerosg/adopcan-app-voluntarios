@@ -3,6 +3,7 @@ package com.adopcan.adopcan_voluntarios.DTO;
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by german on 12/8/2017.
@@ -14,6 +15,8 @@ public class Report implements Serializable{
     private String filename;
     private Ubication ubication;
     private String description;
+    private Date date;
+
 
     public Report(){
         ubication = new Ubication(0.0,0.0);
@@ -31,6 +34,14 @@ public class Report implements Serializable{
         this.description = description;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+
+        return date;
+    }
     public Long getId() {
 
         return id;
@@ -52,4 +63,5 @@ public class Report implements Serializable{
 
         return filename;
     }
+
 }

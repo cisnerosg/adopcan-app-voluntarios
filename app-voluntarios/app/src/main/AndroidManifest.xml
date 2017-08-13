@@ -52,7 +52,11 @@
         </activity>
         <activity android:name=".ReportLostDogDetailsActivity" />
         <activity android:name=".ListDogs" />
-        <activity android:name=".RegDogs"></activity>
+        <activity android:name=".RegDogs" />
+        <activity
+            android:name=".LostDogMapsActivity"
+            android:label="@string/title_activity_lost_dog_maps" />
+        <activity android:name=".InfoWindowMapActivity"></activity>
     </application>
 
 </manifest>

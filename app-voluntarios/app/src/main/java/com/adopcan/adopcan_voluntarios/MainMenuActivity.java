@@ -15,14 +15,19 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
     }
 
+    public void listDogs(View view){
+        Intent intent = new Intent(this, ListDogs.class);
+        startActivity(intent);
+    }
 
     public void reportLostDog(View view){
         Intent intent = new Intent(this, ReportLostDogActivity.class);
         startActivity(intent);
     }
 
-    public void listDogs(View view){
-        Intent intent = new Intent(this, ListDogs.class);
+    public void seeLostDog(View view){
+        Intent intent = new Intent(this, LostDogMapsActivity.class);
         startActivity(intent);
     }
+
 }

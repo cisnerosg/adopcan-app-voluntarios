@@ -1,0 +1,38 @@
+package com.adopcan.adopcan_voluntarios.Mock;
+
+import com.adopcan.adopcan_voluntarios.DTO.Report;
+import com.adopcan.adopcan_voluntarios.DTO.Ubication;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by german on 12/8/2017.
+ */
+
+public class ReportMock {
+
+    public List<Report> listMock(){
+        List<Report> list = new ArrayList<Report>();
+        list.add(buildReport("Es mediano y tiene manchas negras",-35.570133, -59.6085113, new Date()));
+        list.add(buildReport("Es todo blanco y tiene una mancha marron en el ojo",-36.570133, -56.6085113, new Date()));
+
+        return list;
+    }
+
+
+    public Report buildReport(String desc, double lat, double lon, Date fecha){
+        Report report = new Report();
+        report.setDescription(desc);
+        Ubication ubication = new Ubication(lat, lon);
+        report.setUbication(ubication);
+        report.setDate(fecha);
+
+        return report;
+
+    }
+
+
+
+}
