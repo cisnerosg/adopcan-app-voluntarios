@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.adopcan.adopcan_voluntarios.DTO.Report;
+import com.adopcan.adopcan_voluntarios.DTO.Ubication;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,19 +32,20 @@ public class ReportMapsActivity extends FragmentActivity implements OnMapReadyCa
     private Marker marker;
     private double lat = 0.0;
     private double lon = 0.0;
+    private com.adopcan.adopcan_voluntarios.Utils.AlertDialog alertDialog;
+    private Report report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        report = (Report)this.getIntent().getExtras().get("report");
+        alertDialog = new com.adopcan.adopcan_voluntarios.Utils.AlertDialog();
         setContentView(R.layout.activity_report_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -107,9 +110,20 @@ public class ReportMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     }
 
-    public void reportLostDogDetails(View view){
+    private Report getReportWithUbication(){
+        Ubication ubication = new Ubication(lat,lon);
+        report.setUbication(ubication);
 
-        Intent intent = new Intent(this, ReportLostDogDetailsActivity.class);
-        startActivity(intent);
+        return report;
+    }
+
+    public void reportLostDogDetails(View view){
+        if(lat == 0.0 || lon == 0.0){
+            alertDialog.showAlertWithAcept(this, "Alerta", "Tenés que tener marcada una ubicación para continuar");
+        }else {
+            Intent intent = new Intent(this, ReportLostDogDetailsActivity.class);
+            intent.putExtra ("report", getReportWithUbication());
+            startActivity(intent);
+        }
     }
 }
