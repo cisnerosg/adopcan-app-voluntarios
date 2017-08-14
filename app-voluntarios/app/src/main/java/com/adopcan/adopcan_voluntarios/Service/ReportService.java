@@ -15,6 +15,7 @@ public class ReportService {
 
     public void sendReport(Report report){
         /*traer la foto y desp mandarlo*/
+        return;
     }
 
     public List<Report> getListDog(){

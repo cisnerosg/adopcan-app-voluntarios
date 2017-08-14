@@ -31,7 +31,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/holo_blue_light"
-        android:onClick="openReportMap"
+        android:onClick="sendReport"
         android:text="Enviar Reporte"
         android:textColor="@color/colorHintsWhite"
         app:layout_constraintHorizontal_bias="0.501"
