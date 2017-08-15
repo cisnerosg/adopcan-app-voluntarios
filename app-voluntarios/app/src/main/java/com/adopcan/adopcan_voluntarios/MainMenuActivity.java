@@ -17,6 +17,7 @@ public class MainMenuActivity extends AppCompatActivity {
         showAlert(this.getIntent());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
     }
 
     /*Si redirecciona muestro un msj*/

@@ -30,9 +30,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMenuActivity"
+            android:label="Menu Principal"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ReportLostDogActivity"
+            android:label="Reporte-Selección Foto"
             android:screenOrientation="portrait" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -42,8 +44,8 @@
             android:screenOrientation="portrait">
             android:label="@string/title_activity_report_maps">
         </activity>
-        <activity android:name=".ReportLostDogDetailsActivity" />
-        <activity android:name=".ListDogs" />
+        <activity android:name=".ReportLostDogDetailsActivity" android:label="Reporte-Descripción"/>
+        <activity android:name=".ListDogs" android:label="Menu Principal"/>
         <activity android:name=".RegDogs" />
         <activity
             android:name=".LostDogMapsActivity"
