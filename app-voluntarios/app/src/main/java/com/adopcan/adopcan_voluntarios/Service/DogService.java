@@ -12,9 +12,5 @@ import java.util.List;
 public class DogService {
 
 
-    public List<DogTemp> getCalendarDogsByVoluntaryId(long id){
-        DogMock dogMock = new DogMock();
 
-        return dogMock.getDogs();
-    }
 }

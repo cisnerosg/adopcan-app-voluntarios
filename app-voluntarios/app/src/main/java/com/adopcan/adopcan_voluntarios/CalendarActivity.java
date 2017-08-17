@@ -9,33 +9,43 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.adopcan.adopcan_voluntarios.DTO.CalendarInfo;
 import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
+import com.adopcan.adopcan_voluntarios.Service.CalendarInfoService;
 import com.adopcan.adopcan_voluntarios.Service.DogService;
+import com.adopcan.adopcan_voluntarios.Utils.DateUtils;
 
 import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    private DogService dogService;
-    private List<DogTemp> listDog;
+    private CalendarInfoService calendarInfoService;
+    private List<CalendarInfo> listCalendar;
+    private DateUtils dateUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        dogService = new DogService();
-        listDog = dogService.getCalendarDogsByVoluntaryId(1);
+        dateUtils = new DateUtils();
+        initListDog();
+
+    }
+
+    /*busca los perros y los agrega en el listview*/
+    private void initListDog(){
+        calendarInfoService = new CalendarInfoService();
+        listCalendar = calendarInfoService.getCalendarDogsByVoluntaryId(1);
         ListView listView = (ListView)findViewById(R.id.listView_calendar);
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
-
     }
 
     class CustomAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
-            return listDog.size();
+            return listCalendar.size();
         }
 
         @Override
@@ -57,8 +67,8 @@ public class CalendarActivity extends AppCompatActivity {
             TextView textDescription = (TextView)view.findViewById(R.id.textView_description);
 
             imageView.setImageResource(R.drawable.makephoto);
-            textName.setText(listDog.get(i).getName());
-            textDescription.setText(listDog.get(i).getName());
+            textName.setText("fecha: " + dateUtils.getDate(listCalendar.get(i).getEventDate()) +  dateUtils.getHour(listCalendar.get(i).getEventHour())+ listCalendar.get(i).getDog().getName());
+            textDescription.setText(listCalendar.get(i).getDescription());
 
             return view;
         }

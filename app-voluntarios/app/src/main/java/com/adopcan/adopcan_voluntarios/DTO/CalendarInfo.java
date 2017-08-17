@@ -10,14 +10,16 @@ public class CalendarInfo {
 
     private long id;
     private Date eventDate;
+    private Date eventHour;
     private String description;
     private DogTemp dog;
 
-    public CalendarInfo(long id, Date eventDate, String description, DogTemp dog) {
+    public CalendarInfo(long id, Date eventDate,  Date eventHour, String description, DogTemp dog) {
         this.id = id;
         this.eventDate = eventDate;
         this.description = description;
         this.dog = dog;
+        this.eventHour = eventHour;
     }
 
     public long getId() {
@@ -50,5 +52,13 @@ public class CalendarInfo {
 
     public void setDog(DogTemp dog) {
         this.dog = dog;
+    }
+
+    public Date getEventHour() {
+        return eventHour;
+    }
+
+    public void setEventHour(Date eventHour) {
+        this.eventHour = eventHour;
     }
 }
