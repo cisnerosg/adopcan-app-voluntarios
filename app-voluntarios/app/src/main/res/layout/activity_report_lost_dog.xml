@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBottom"
     tools:context=".ReportLostDogActivity">
 
     <TextView
@@ -49,7 +49,7 @@
         android:layout_marginRight="8dp"
         android:onClick="openReportMap"
         android:text="SIGUIENTE"
-        android:backgroundTint="@android:color/holo_blue_light"
+        android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/colorHintsWhite"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

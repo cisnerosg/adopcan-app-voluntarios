@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBottom"
     tools:context=".MainMenuActivity">
 <ScrollView
     android:layout_width="370dp"
@@ -35,7 +35,7 @@
             android:id="@+id/button31"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/colorHintsWhite"
             android:text="Mi Agenda" />
 
@@ -43,7 +43,7 @@
             android:id="@+id/button33"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/colorHintsWhite"
             android:onClick="listDogs"
             android:text="Mis Perros" />
@@ -52,7 +52,7 @@
             android:id="@+id/button34"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/colorHintsWhite"
             android:onClick="reportLostDog"
             android:text="Reportar Perros Perdido" />
@@ -61,7 +61,7 @@
             android:id="@+id/button35"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/colorHintsWhite"
             android:onClick="seeLostDog"
             android:text="Mapa Perros Perdidos" />
@@ -70,7 +70,7 @@
             android:id="@+id/button36"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/colorHintsWhite"
             android:text="Conocenos" />
 

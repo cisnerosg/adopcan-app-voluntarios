@@ -29,29 +29,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenuActivity"
+        <activity
+            android:name=".MainMenuActivity"
             android:label="Menu Principal"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ReportLostDogActivity"
             android:label="Reporte-Selección Foto"
             android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".ReportMapsActivity"
             android:screenOrientation="portrait">
             android:label="@string/title_activity_report_maps">
         </activity>
-        <activity android:name=".ReportLostDogDetailsActivity" android:label="Reporte-Descripción"/>
-        <activity android:name=".ListDogs" android:label="Menu Principal"/>
+        <activity
+            android:name=".ReportLostDogDetailsActivity"
+            android:label="Reporte-Descripción" />
+        <activity
+            android:name=".ListDogs"
+            android:label="Menu Principal" />
         <activity android:name=".RegDogs" />
         <activity
             android:name=".LostDogMapsActivity"
-            android:label="@string/title_activity_lost_dog_maps"
-            android:configChanges="screenSize|orientation"/>
-        <activity android:name=".InfoWindowMapActivity"></activity>
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_lost_dog_maps" />
+        <activity android:name=".InfoWindowMapActivity" />
+        <activity android:name=".CalendarActivity"></activity>
     </application>
 
 </manifest>
