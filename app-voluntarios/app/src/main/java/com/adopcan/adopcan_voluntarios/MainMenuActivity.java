@@ -52,4 +52,8 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void getCalendarInfo(View view){
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
+    }
 }

@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/colorHintsWhite"
+            android:onClick="getCalendarInfo"
             android:text="Mi Agenda" />
 
         <Button
