@@ -3,6 +3,8 @@ package com.adopcan.adopcan_voluntarios;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,11 +18,24 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
     private com.adopcan.adopcan_voluntarios.Utils.AlertDialog alertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         report = (Report)this.getIntent().getExtras().get("report");
         alertDialog = new com.adopcan.adopcan_voluntarios.Utils.AlertDialog();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_lost_dog_details);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                Log.i("ActionBar", "Atrás!");
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private Report getReportWithDescription(String description){

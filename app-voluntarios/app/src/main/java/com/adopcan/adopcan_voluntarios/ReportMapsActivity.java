@@ -10,6 +10,9 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.adopcan.adopcan_voluntarios.DTO.Report;
@@ -26,7 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import static com.adopcan.adopcan_voluntarios.R.drawable.dog;
 
-public class ReportMapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ReportMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Marker marker;
@@ -38,6 +41,7 @@ public class ReportMapsActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         report = (Report)this.getIntent().getExtras().get("report");
         alertDialog = new com.adopcan.adopcan_voluntarios.Utils.AlertDialog();
         setContentView(R.layout.activity_report_maps);
@@ -45,6 +49,18 @@ public class ReportMapsActivity extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                Log.i("ActionBar", "Atrás!");
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

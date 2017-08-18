@@ -9,7 +9,10 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 
 import com.adopcan.adopcan_voluntarios.Adapter.CustomInfoWindowAdapter;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
@@ -29,7 +32,7 @@ import java.util.List;
 
 import static com.adopcan.adopcan_voluntarios.R.drawable.dog;
 
-public class LostDogMapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class LostDogMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Marker marker;
@@ -39,6 +42,7 @@ public class LostDogMapsActivity extends FragmentActivity implements OnMapReadyC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_lost_dog_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -46,7 +50,17 @@ public class LostDogMapsActivity extends FragmentActivity implements OnMapReadyC
         mapFragment.getMapAsync(this);
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                Log.i("ActionBar", "Atrás!");
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

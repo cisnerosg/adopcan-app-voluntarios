@@ -2,6 +2,8 @@ package com.adopcan.adopcan_voluntarios;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -26,15 +28,27 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_calendar);
         dateUtils = new DateUtils();
         initListDog();
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                Log.i("ActionBar", "Atrás!");
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     /*busca los perros y los agrega en el listview*/
     private void initListDog(){
         calendarInfoService = new CalendarInfoService();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         listCalendar = calendarInfoService.getCalendarDogsByVoluntaryId(1);
         ListView listView = (ListView)findViewById(R.id.listView_calendar);
         CustomAdapter customAdapter = new CustomAdapter();

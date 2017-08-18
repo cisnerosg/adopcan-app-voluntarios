@@ -35,7 +35,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ReportLostDogActivity"
-            android:label="Reporte-Selección Foto"
+            android:label="Selección Foto"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -44,22 +44,24 @@
 
         <activity
             android:name=".ReportMapsActivity"
+            android:label="Ubicación"
             android:screenOrientation="portrait">
             android:label="@string/title_activity_report_maps">
         </activity>
         <activity
             android:name=".ReportLostDogDetailsActivity"
-            android:label="Reporte-Descripción" />
+            android:label="Descripción" />
         <activity
             android:name=".ListDogs"
-            android:label="Menu Principal" />
+            android:label="Mis Perros" />
         <activity android:name=".RegDogs" />
         <activity
             android:name=".LostDogMapsActivity"
             android:configChanges="screenSize|orientation"
-            android:label="@string/title_activity_lost_dog_maps" />
+            android:label="Ubicaciones" />
         <activity android:name=".InfoWindowMapActivity" />
-        <activity android:name=".CalendarActivity"></activity>
+        <activity android:label="Mi Agenda"
+            android:name=".CalendarActivity"></activity>
     </application>
 
 </manifest>
