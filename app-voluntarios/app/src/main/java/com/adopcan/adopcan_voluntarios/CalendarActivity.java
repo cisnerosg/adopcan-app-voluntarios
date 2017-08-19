@@ -12,9 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.DTO.CalendarInfo;
-import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 import com.adopcan.adopcan_voluntarios.Service.CalendarInfoService;
-import com.adopcan.adopcan_voluntarios.Service.DogService;
 import com.adopcan.adopcan_voluntarios.Utils.DateUtils;
 
 import java.util.List;
@@ -77,11 +75,15 @@ public class CalendarActivity extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.calendar_info, null);
 
             ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
+            TextView textDate = (TextView)view.findViewById(R.id.textView_date);
             TextView textName = (TextView)view.findViewById(R.id.textView_name);
+            TextView textPlace = (TextView)view.findViewById(R.id.textView_place);
             TextView textDescription = (TextView)view.findViewById(R.id.textView_description);
 
             imageView.setImageResource(R.drawable.makephoto);
-            textName.setText("fecha: " + dateUtils.getDate(listCalendar.get(i).getEventDate()) +  dateUtils.getHour(listCalendar.get(i).getEventHour())+ listCalendar.get(i).getDog().getName());
+            textDate.setText(dateUtils.getDate(listCalendar.get(i).getEventDate()) + " " +dateUtils.getHour(listCalendar.get(i).getEventHour()));
+            textName.setText(listCalendar.get(i).getDog().getName());
+            textPlace.setText(listCalendar.get(i).getPlace());
             textDescription.setText(listCalendar.get(i).getDescription());
 
             return view;
