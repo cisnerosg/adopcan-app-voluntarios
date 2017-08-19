@@ -4,4 +4,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_report_maps">Map</string>
     <string name="title_activity_lost_dog_maps">Map</string>
+    <string name="edad_lbl">Edad:</string>
+    <string name="dog_list_title_lbl">Mis Perros</string>
 </resources>

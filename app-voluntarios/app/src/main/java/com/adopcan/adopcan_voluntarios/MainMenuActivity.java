@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 
 import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
@@ -18,7 +19,6 @@ public class MainMenuActivity extends AppCompatActivity {
         showAlert(this.getIntent());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void listDogs(View view){
-        Intent intent = new Intent(this, ListDogs.class);
+        Intent intent = new Intent(this, ListDogActivity.class);
         startActivity(intent);
     }
 

@@ -52,9 +52,8 @@
             android:name=".ReportLostDogDetailsActivity"
             android:label="Descripción" />
         <activity
-            android:name=".ListDogs"
+            android:name=".ListDogActivity"
             android:label="Mis Perros" />
-        <activity android:name=".RegDogs" />
         <activity
             android:name=".LostDogMapsActivity"
             android:configChanges="screenSize|orientation"
