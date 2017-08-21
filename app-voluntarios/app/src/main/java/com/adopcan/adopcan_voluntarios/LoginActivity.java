@@ -82,5 +82,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
         } catch (UnsupportedEncodingException e) {
             // exception
         }
+        alertDialog.showAlertWithAcept(this, "Alerta", "El usuario o la contraseña no son válidos");
+
     }
 }

@@ -2,6 +2,7 @@ package com.adopcan.adopcan_voluntarios;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -15,9 +16,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 
 import com.adopcan.adopcan_voluntarios.Adapter.CustomInfoWindowAdapter;
+import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
+import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.DTO.Ubication;
+import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
+import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
+import com.adopcan.adopcan_voluntarios.Service.AccessTokenService;
 import com.adopcan.adopcan_voluntarios.Service.ReportService;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,12 +36,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import static com.adopcan.adopcan_voluntarios.R.drawable.dog;
 
-public class LostDogMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class LostDogMapsActivity extends AppCompatActivity implements OnMapReadyCallback, Response.ErrorListener, Response.Listener<String> {
 
     private GoogleMap mMap;
     private Marker marker;
@@ -69,8 +81,18 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(this)));
 
         ReportService service = new ReportService();
+
+        ////////////////////////////////////////////////////////////////
+
+        ReportService reportService = new ReportService();
+        Request<?> request = reportService.getReports(this, this);
+        AppController.getInstance().addToRequestQueue(request);
+
+
+        /////////////////////////////////////////////////////////////////
         //marcadores de perros perdidos
         List<Report> reports = service.getListDog();
+
 
         for(Report r : reports) {
             LatLng coor = new LatLng(r.getUbication().getLatitud(), r.getUbication().getLongitud()
@@ -142,6 +164,28 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         }
 
         return new Ubication(lat, lon);
+    }
+
+    @Override
+    public void onResponse(String response) {
+        Log.i("get correcto",response);
+    }
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        if (error == null || error.networkResponse == null) {
+            return;
+        }
+
+        String body;
+        //get status code here
+        final String statusCode = String.valueOf(error.networkResponse.statusCode);
+        //get response body and parse with appropriate encoding
+        try {
+            body = new String(error.networkResponse.data,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // exception
+        }
+
     }
 
 }

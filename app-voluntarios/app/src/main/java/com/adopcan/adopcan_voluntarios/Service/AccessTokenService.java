@@ -1,10 +1,20 @@
 package com.adopcan.adopcan_voluntarios.Service;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
+import com.adopcan.adopcan_voluntarios.DTO.User;
+import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
+import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
+import com.adopcan.adopcan_voluntarios.Utils.HttpMethod;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -18,6 +28,7 @@ public class AccessTokenService {
 
     public StringRequest getAccessToken(String username, String pass, Response.Listener<String> responseListener, Response.ErrorListener errorListener){
 
+
         final Map<String, String> params = new LinkedHashMap<>();
         params.put("grant_type", "password");
         params.put("client_id", "android");
@@ -26,23 +37,11 @@ public class AccessTokenService {
         params.put("username", "ong@yopmail.com");
         params.put("password", "12345678");
 
-        String url=  "http://www.adopcan.com/api/access_token";
+        String url = "http://www.adopcan.com/api/access_token";
 
-        StringRequest request = new StringRequest(Request.Method.POST, url,responseListener,errorListener){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/x-www-form-urlencoded");
-                return headers;
-            }
+        HttpMethod httpMethod = new HttpMethod();
+        return httpMethod.httpPostMethod(url, params, responseListener,errorListener);
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                return params;
-            }
-        };
-
-        request.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        return request;
     }
+
 }

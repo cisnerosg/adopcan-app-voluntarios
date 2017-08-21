@@ -26,6 +26,8 @@ public class CalendarInfo {
         this.place = place;
     }
 
+
+
     public Long getId() {
         return id;
     }

@@ -17,6 +17,10 @@ public class ResponseToken {
     @SerializedName("refresh_token")
     private String refreshToken;
 
+    public String getAutorization(){
+        return getRefreshToken() + " " + getAccessToken();
+    }
+
     public String getTokenType() {
         return tokenType;
     }

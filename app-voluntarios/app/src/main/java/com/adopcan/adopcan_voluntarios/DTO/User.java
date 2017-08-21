@@ -15,7 +15,6 @@ public class User {
     private UserType type;
     private ResponseToken responseToken;
 
-
     public User(String username, String password, UserType type) {
         this.username = username;
         this.password = password;
@@ -49,5 +48,9 @@ public class User {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+    public ResponseToken getResponseToken() {
+        return responseToken;
     }
 }

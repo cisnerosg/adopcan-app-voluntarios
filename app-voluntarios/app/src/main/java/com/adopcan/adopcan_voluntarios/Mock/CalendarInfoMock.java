@@ -15,7 +15,7 @@ public class CalendarInfoMock {
     public CalendarInfo getCalendarInfo(Date date, Date hour,String description, String name, String place){
         DogMock dogMock = new DogMock();
 
-        CalendarInfo calendar = new CalendarInfo(1, date, hour, description, dogMock.getDog(1,name), place);
+        CalendarInfo calendar = new CalendarInfo(1L, date, hour, description, dogMock.getDog(1,name), place);
         return calendar;
     }
 
