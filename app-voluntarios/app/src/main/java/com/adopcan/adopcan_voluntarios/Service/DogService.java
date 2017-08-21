@@ -11,6 +11,10 @@ import java.util.List;
 
 public class DogService {
 
+    public List<DogTemp> getDogs(Long userId){
 
+
+
+    }
 
 }

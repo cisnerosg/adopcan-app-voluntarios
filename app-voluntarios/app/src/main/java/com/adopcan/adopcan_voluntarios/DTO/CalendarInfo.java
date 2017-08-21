@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class CalendarInfo {
 
-    private long id;
+    private Long id;
     private DogTemp dog;
     private String place;
     private Date eventDate;
@@ -17,7 +17,7 @@ public class CalendarInfo {
 
 
 
-    public CalendarInfo(long id, Date eventDate,  Date eventHour, String description, DogTemp dog, String place) {
+    public CalendarInfo(Long id, Date eventDate,  Date eventHour, String description, DogTemp dog, String place) {
         this.id = id;
         this.eventDate = eventDate;
         this.description = description;
@@ -26,11 +26,11 @@ public class CalendarInfo {
         this.place = place;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

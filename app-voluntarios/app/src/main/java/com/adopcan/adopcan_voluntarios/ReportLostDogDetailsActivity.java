@@ -45,7 +45,8 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
     }
 
     public void sendReport(View view){
-       String description = ((EditText)findViewById(R.id.editText_description)).getText().toString();
+
+        String description = ((EditText)findViewById(R.id.editText_description)).getText().toString();
 
         if(description.equals("")){
             alertDialog.showAlertWithAcept(this, "Alerta", "Tenés que agregar un comentanrio, acordate que mientras mas describas más fácil lo podrán reconocer");

@@ -12,14 +12,32 @@ import java.util.Date;
 public class Report implements Serializable{
 
     private Long id;
+    private Long userId;
     private String filename;
     private Ubication ubication;
     private String description;
     private Date date;
+    private Bitmap photo;
 
+
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
+    }
 
     public Report(){
         ubication = new Ubication(0.0,0.0);
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setId(Long id) {
