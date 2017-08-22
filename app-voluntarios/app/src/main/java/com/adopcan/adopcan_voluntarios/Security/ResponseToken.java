@@ -18,7 +18,7 @@ public class ResponseToken {
     private String refreshToken;
 
     public String getAutorization(){
-        return getRefreshToken() + " " + getAccessToken();
+        return getTokenType() + " " + getAccessToken();
     }
 
     public String getTokenType() {
