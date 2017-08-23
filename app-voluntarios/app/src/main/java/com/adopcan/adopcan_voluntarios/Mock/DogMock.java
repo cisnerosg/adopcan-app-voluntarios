@@ -1,5 +1,6 @@
 package com.adopcan.adopcan_voluntarios.Mock;
 
+import com.adopcan.adopcan_voluntarios.DTO.Dog;
 import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ public class DogMock {
     }
 
 
-    public List<DogTemp> getDogs(){
+    public List <Dog> getDogs(){
 
-        List<DogTemp> list = new ArrayList<DogTemp>();
+        List<Dog> list = new ArrayList <>();
 
         list.add(getDog(1,"Morena"));
         list.add(getDog(2,"Nina"));

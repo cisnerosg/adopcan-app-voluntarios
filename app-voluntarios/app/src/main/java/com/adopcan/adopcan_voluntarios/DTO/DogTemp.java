@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
  * lo creo temporalmente, despues unifico con el q use Alcides
  */
 
-public class DogTemp {
+public class DogTemp extends Dog {
 
     private long id;
     private String name;

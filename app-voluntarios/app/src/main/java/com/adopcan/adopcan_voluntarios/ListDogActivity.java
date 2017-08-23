@@ -13,11 +13,29 @@ import android.view.View;
 import com.adopcan.adopcan_voluntarios.Adapter.DogAdapter;
 import com.adopcan.adopcan_voluntarios.Adapter.DogListener;
 import com.adopcan.adopcan_voluntarios.ApiWebService.ApiInteractor;
+import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.DTO.Dog;
+import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.R;
-import java.util.ArrayList;
+import com.adopcan.adopcan_voluntarios.Service.DogService;
+import com.adopcan.adopcan_voluntarios.Service.ReportService;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ListDogActivity extends AppCompatActivity {
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.adopcan.adopcan_voluntarios.R.drawable.dog;
+
+public class ListDogActivity extends AppCompatActivity implements Response.ErrorListener, Response.Listener <String> {
     private Toolbar mToolbar;
     private ApiInteractor mApiInteract;
     private DogAdapter mAdapter;
@@ -67,12 +85,34 @@ public class ListDogActivity extends AppCompatActivity {
 
     //carga de lista
     private void fillList(ArrayList<Dog> list) {
-        mAdapter = new DogAdapter(this, list);
+        //mAdapter = new DogAdapter(this, list);
         listRecycler.setAdapter(mAdapter);
         listRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listRecycler.setHasFixedSize(false);
+
+        DogService service = new DogService();
+
+        ////////////////////////////////////////////////////////////////
+
+        DogService dogService = new DogService();
+        Request<?> request = dogService.getDogs(this, this);
+        AppController.getInstance().addToRequestQueue(request);
+
+
+        /////////////////////////////////////////////////////////////////
+        //marcadores de perros perdidos
+        List<Dog> dogs = service.getListDog();
+
+
+        for(Dog r : dogs) {
+            if (r != null)
+                Log.v(TAG, "name=>" + r.getNombre() + " edad=>" + r.getEdad());
+            else
+                Log.d("Error","No hay lista");
+        }
+
         //Cuando clickeo un perro
-        mAdapter.setOnClickListener(new View.OnClickListener() {
+        /*mAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Dog item = mAdapter.getItemByPos(listRecycler.getChildAdapterPosition(view));
@@ -81,7 +121,28 @@ public class ListDogActivity extends AppCompatActivity {
                 else
                     Log.d("Error","No hay lista");
             }
-        });
+        });*/
     }
 
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        if (error == null || error.networkResponse == null) {
+            return;
+        }
+
+        String body;
+        //get status code here
+        final String statusCode = String.valueOf(error.networkResponse.statusCode);
+        //get response body and parse with appropriate encoding
+        try {
+            body = new String(error.networkResponse.data,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // exception
+        }
+    }
+
+    @Override
+    public void onResponse(String response) {
+        Log.i("get correcto",response);
+    }
 }
