@@ -37,7 +37,7 @@ public class ReportService {
 
     public StringRequest getReports(Response.Listener<String> responseListener, Response.ErrorListener errorListener) {
         List<Report> list = new ArrayList<Report>();
-        String url = "http://www.adopcan.com/api/organizaciones";
+        String url = "http://www.adopcan.com/api/reporte";
 
         HttpMethod httpMethod = new HttpMethod();
         return httpMethod.httpGetMethod(url,responseListener, errorListener);

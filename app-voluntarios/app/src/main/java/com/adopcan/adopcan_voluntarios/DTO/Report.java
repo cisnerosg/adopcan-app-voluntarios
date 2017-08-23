@@ -2,6 +2,8 @@ package com.adopcan.adopcan_voluntarios.DTO;
 
 import android.graphics.Bitmap;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,10 +13,16 @@ import java.util.Date;
 
 public class Report implements Serializable{
 
-    private Long id;
+    @SerializedName("id")
+    private String id;
+
     private Long userId;
+
+    @SerializedName("foto")
     private String filename;
+
     private Ubication ubication;
+    @SerializedName("descripcion")
     private String description;
     private Date date;
     private Bitmap photo;
@@ -40,7 +48,7 @@ public class Report implements Serializable{
         this.userId = userId;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,7 +68,7 @@ public class Report implements Serializable{
 
         return date;
     }
-    public Long getId() {
+    public String getId() {
 
         return id;
     }

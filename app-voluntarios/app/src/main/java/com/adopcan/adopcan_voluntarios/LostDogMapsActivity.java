@@ -20,6 +20,7 @@ import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.DTO.Ubication;
+import com.adopcan.adopcan_voluntarios.Security.ReportTest;
 import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.adopcan.adopcan_voluntarios.Service.AccessTokenService;
@@ -38,8 +39,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.adopcan.adopcan_voluntarios.R.drawable.dog;
@@ -169,6 +173,19 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     @Override
     public void onResponse(String response) {
         Log.i("get correcto",response);
+        GsonBuilder builder = new GsonBuilder();
+        builder.setExclusionStrategies(new DefaultExclusionStrategy());
+        Gson json = builder.excludeFieldsWithoutExposeAnnotation().create();
+
+        List<ReportTest> listReport = new ArrayList<ReportTest>();
+
+        try {
+            listReport= getList(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String fdf = listReport.get(0).getDescripcion();
+        String dsd ="s";
     }
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -187,5 +204,13 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         }
 
     }
+
+
+        public static final <T> List<T> getList(String json) throws Exception {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+            Type typeOfList = new TypeToken<List<T>>(){}.getType();
+            return gson.fromJson(json, typeOfList);
+        }
+
 
 }
