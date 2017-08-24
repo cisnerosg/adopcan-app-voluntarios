@@ -85,7 +85,7 @@ public class ListDogActivity extends AppCompatActivity implements Response.Error
 
     //carga de lista
     private void fillList(ArrayList<Dog> list) {
-        //mAdapter = new DogAdapter(this, list);
+        mAdapter = new DogAdapter(this, list);
         listRecycler.setAdapter(mAdapter);
         listRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listRecycler.setHasFixedSize(false);
@@ -98,11 +98,9 @@ public class ListDogActivity extends AppCompatActivity implements Response.Error
         Request<?> request = dogService.getDogs(this, this);
         AppController.getInstance().addToRequestQueue(request);
 
-
         /////////////////////////////////////////////////////////////////
         //marcadores de perros perdidos
         List<Dog> dogs = service.getListDog();
-
 
         for(Dog r : dogs) {
             if (r != null)
