@@ -27,8 +27,8 @@ public class ReportMock {
     public Report buildReport(String desc, double lat, double lon, Date fecha){
         Report report = new Report();
         report.setDescription(desc);
-        Ubication ubication = new Ubication(lat, lon);
-        report.setUbication(ubication);
+        report.setLatitude(lat);
+        report.setLongitude(lon);
         report.setDate(fecha);
 
         return report;

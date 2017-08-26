@@ -127,8 +127,8 @@ public class ReportMapsActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     private Report getReportWithUbication(){
-        Ubication ubication = new Ubication(lat,lon);
-        report.setUbication(ubication);
+        report.setLatitude(lat);
+        report.setLongitude(lon);
 
         return report;
     }

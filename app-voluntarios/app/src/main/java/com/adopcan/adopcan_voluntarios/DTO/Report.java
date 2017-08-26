@@ -1,5 +1,6 @@
 package com.adopcan.adopcan_voluntarios.DTO;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.google.gson.annotations.SerializedName;
@@ -16,17 +17,83 @@ public class Report implements Serializable{
     @SerializedName("id")
     private String id;
 
-    private Long userId;
-
     @SerializedName("foto")
     private String filename;
 
-    private Ubication ubication;
+    @SerializedName("latitude")
+    private double latitude;
+
+    @SerializedName("longitude")
+    private double longitude;
+
     @SerializedName("descripcion")
     private String description;
+
+    @SerializedName("estado")
+    private int state;
+
+    @SerializedName("created_at")
+    private String createdAt;
+
     private Date date;
+
     private Bitmap photo;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Bitmap getPhoto() {
         return photo;
@@ -36,58 +103,11 @@ public class Report implements Serializable{
         this.photo = photo;
     }
 
-    public Report(){
-        ubication = new Ubication(0.0,0.0);
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public Long getUserId() {
-        return userId;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setUbication(Ubication ubication) {
-        this.ubication = ubication;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Date getDate() {
-
-        return date;
-    }
-    public String getId() {
-
-        return id;
-    }
-
-    public Ubication getUbication() {
-        return ubication;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
-    public String getFilename() {
-
-        return filename;
-    }
-
 }

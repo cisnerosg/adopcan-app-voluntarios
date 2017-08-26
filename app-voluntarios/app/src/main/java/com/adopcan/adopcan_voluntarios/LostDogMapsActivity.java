@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,17 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.adopcan.adopcan_voluntarios.Adapter.CustomInfoWindowAdapter;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
+import com.adopcan.adopcan_voluntarios.DTO.TagReport;
 import com.adopcan.adopcan_voluntarios.DTO.Ubication;
 import com.adopcan.adopcan_voluntarios.Security.ReportTest;
 import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.adopcan.adopcan_voluntarios.Service.AccessTokenService;
 import com.adopcan.adopcan_voluntarios.Service.ReportService;
+import com.adopcan.adopcan_voluntarios.Utils.JsonUtils;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -40,12 +44,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.tag;
 import static com.adopcan.adopcan_voluntarios.R.drawable.dog;
 
 public class LostDogMapsActivity extends AppCompatActivity implements OnMapReadyCallback, Response.ErrorListener, Response.Listener<String> {
@@ -54,12 +62,14 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     private Marker marker;
     private double lat = 0.0;
     private double lon = 0.0;
+    private JsonUtils jsonUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_lost_dog_maps);
+        jsonUtils = new JsonUtils();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -91,33 +101,6 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         ReportService reportService = new ReportService();
         Request<?> request = reportService.getReports(this, this);
         AppController.getInstance().addToRequestQueue(request);
-
-
-        /////////////////////////////////////////////////////////////////
-        //marcadores de perros perdidos
-        List<Report> reports = service.getListDog();
-
-
-        for(Report r : reports) {
-            LatLng coor = new LatLng(r.getUbication().getLatitud(), r.getUbication().getLongitud()
-            );
-            CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor, 15);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(coor).title("Mi Ubicación").icon(BitmapDescriptorFactory.fromResource(dog)).snippet("Si querés cambiar la posición arrastrá el marcador"));
-
-            marker.setTag(r);
-            mMap.animateCamera(ubication);
-        }
-
-        /*Mi ubicacion*/
-        Ubication myUbication = myUbication();
-        LatLng coor = new LatLng(myUbication.getLatitud(), myUbication.getLongitud());
-        CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor,17);
-        if (marker != null) {
-            marker.remove();
-        }
-
-        marker = mMap.addMarker(new MarkerOptions().position(coor).title("Mi Ubicación").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)).draggable(true));
-        mMap.animateCamera(ubication);
     }
 
 
@@ -172,20 +155,16 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onResponse(String response) {
-        Log.i("get correcto",response);
-        GsonBuilder builder = new GsonBuilder();
-        builder.setExclusionStrategies(new DefaultExclusionStrategy());
-        Gson json = builder.excludeFieldsWithoutExposeAnnotation().create();
 
-        List<ReportTest> listReport = new ArrayList<ReportTest>();
+        List<Report> listReport = new ArrayList<Report>();
 
         try {
-            listReport= getList(response);
+            listReport= getListFromJson(response);
+            fillMap(listReport);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String fdf = listReport.get(0).getDescripcion();
-        String dsd ="s";
+
     }
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -206,11 +185,38 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     }
 
 
-        public static final <T> List<T> getList(String json) throws Exception {
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-            Type typeOfList = new TypeToken<List<T>>(){}.getType();
-            return gson.fromJson(json, typeOfList);
+    private static final List<Report> getListFromJson(String json) throws Exception {
+        Gson gson = new GsonBuilder().create();
+        Type typeOfList = new TypeToken<List<Report>>(){}.getType();
+        return gson.fromJson(json, typeOfList);
+    }
+
+    private void fillMap(List<Report> reports){
+        for(Report r : reports) {
+            LatLng coor = new LatLng(r.getLatitude(), r.getLongitude());
+            CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor, 15);
+            Marker marker = mMap.addMarker(new MarkerOptions().position(coor).title("Mi Ubicación").icon(BitmapDescriptorFactory.fromResource(dog)).snippet("Si querés cambiar la posición arrastrá el marcador"));
+
+            TagReport tag = new TagReport(r, this);
+            marker.setTag(tag);
+
+            mMap.animateCamera(ubication);
         }
+
+        /*Mi ubicacion*/
+        Ubication myUbication = myUbication();
+        LatLng coor = new LatLng(myUbication.getLatitud(), myUbication.getLongitud());
+        CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor,17);
+        if (marker != null) {
+            marker.remove();
+        }
+
+        marker = mMap.addMarker(new MarkerOptions().position(coor).title("Mi Ubicación").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)).draggable(true));
+        mMap.animateCamera(ubication);
+    }
+
+
+
 
 
 }
