@@ -15,9 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adopcan.adopcan_voluntarios.Adapter.CustomInfoWindowAdapter;
+import com.adopcan.adopcan_voluntarios.Adapter.CustomOnInfoWindowLongClickListenerAdapter;
+import com.adopcan.adopcan_voluntarios.Adapter.OnInfoWindowElemTouchListener;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
@@ -64,6 +71,11 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     private double lon = 0.0;
     private JsonUtils jsonUtils;
 
+    private LayoutInflater inflater;
+
+    public LostDogMapsActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +105,8 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         mMap = googleMap;
 
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(this)));
+
+        mMap.setOnInfoWindowLongClickListener(new CustomOnInfoWindowLongClickListenerAdapter(LayoutInflater.from(this)));
 
         ReportService service = new ReportService();
 

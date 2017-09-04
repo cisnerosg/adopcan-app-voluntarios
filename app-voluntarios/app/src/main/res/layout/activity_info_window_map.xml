@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp" >
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/info_window_imagen"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:scaleType="centerCrop"
-         />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/info_window_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/info_window_imagen"
         android:paddingLeft="5dp"
         android:text="Descripcion"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/info_window_imagen"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/info_window_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/info_window_description"
-        android:layout_toRightOf="@id/info_window_imagen"
         android:paddingLeft="5dp"
-        android:text="Fecha Reporte:" />
+        android:text="Fecha Reporte:"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/info_window_imagen" />
 
     <TextView
         android:id="@+id/info_window_hour"
@@ -38,5 +39,39 @@
         android:layout_toRightOf="@id/info_window_imagen"
         android:paddingLeft="5dp"
         android:text="Hora Reporte:" />
+
+    <TextView
+        android:id="@+id/info_window_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_window_hour"
+        android:layout_toRightOf="@id/info_window_imagen"
+        android:paddingLeft="5dp"
+        android:text="Estado:" />
+
+
+    <TextView
+        android:id="@+id/line"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:paddingTop="5dip"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignBaseline="@+id/info_window_inform"
+        android:layout_alignBottom="@+id/info_window_inform"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/info_window_inform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:text="Reporta que el perro fue rescatado manteniendo presionado"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_below="@+id/info_window_description"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp" />
+
 
 </RelativeLayout>

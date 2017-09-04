@@ -7,6 +7,7 @@ import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,7 +27,7 @@ import java.util.Map;
  */
 
 public class HttpMethod {
-    public StringRequest httpPostMethod( String url, Map<String, String> parameters, Response.Listener<String> responseListener,Response.ErrorListener errorListener){
+    public StringRequest httpPostMethod(String url , Map<String, String> parameters, Response.Listener<String> responseListener, Response.ErrorListener errorListener){
         final Map<String, String> params = parameters;
 
         StringRequest request = new StringRequest(Request.Method.POST, url,responseListener,errorListener){
@@ -34,6 +35,7 @@ public class HttpMethod {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
+
                 return headers;
             }
 

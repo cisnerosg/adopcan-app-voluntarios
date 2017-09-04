@@ -13,9 +13,8 @@ import java.util.List;
 public class DogMock {
 
     public DogTemp getDog(long id, String name){
-        DogTemp dog = new DogTemp(id, name);
 
-        return dog;
+        return null;
     }
 
 
@@ -23,10 +22,6 @@ public class DogMock {
 
         List<Dog> list = new ArrayList <>();
 
-        list.add(getDog(1,"Morena"));
-        list.add(getDog(2,"Nina"));
-        list.add(getDog(3,"Popi"));
-        list.add(getDog(4,"Black"));
 
         return list;
     }

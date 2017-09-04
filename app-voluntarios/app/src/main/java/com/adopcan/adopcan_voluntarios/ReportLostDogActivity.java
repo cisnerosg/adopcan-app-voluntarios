@@ -4,6 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,8 +26,10 @@ import android.widget.ImageView;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.R;
 import com.adopcan.adopcan_voluntarios.Utils.SaveImage;
+import com.adopcan.adopcan_voluntarios.Volley.AppHelper;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -45,7 +50,16 @@ public class ReportLostDogActivity extends AppCompatActivity {
         alertDialog = new com.adopcan.adopcan_voluntarios.Utils.AlertDialog();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_lost_dog);
+
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -115,7 +129,10 @@ public class ReportLostDogActivity extends AppCompatActivity {
 
     private Report getReportWithFilenamePhoto(){
         Report report = new Report();
-        report.setFilename(filename);
+
+        byte[] bytes = AppHelper.getFileDataFromDrawable(bitmap);
+
+        report.setPhotoByte(bytes);
 
         return report;
     }

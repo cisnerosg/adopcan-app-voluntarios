@@ -39,6 +39,8 @@ public class Report implements Serializable{
 
     private Bitmap photo;
 
+    private byte[] photoByte;
+
     public String getId() {
         return id;
     }
@@ -109,5 +111,17 @@ public class Report implements Serializable{
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public State getEnumState() {
+        return State.getById(state);
+    }
+
+    public byte[] getPhotoByte() {
+        return photoByte;
+    }
+
+    public void setPhotoByte(byte[] photoByte) {
+        this.photoByte = photoByte;
     }
 }

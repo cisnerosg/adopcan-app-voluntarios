@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
+import com.adopcan.adopcan_voluntarios.DTO.State;
 import com.adopcan.adopcan_voluntarios.DTO.TagReport;
 import com.adopcan.adopcan_voluntarios.R;
 import com.adopcan.adopcan_voluntarios.Service.ImageService;
@@ -49,7 +50,6 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     public CustomInfoWindowAdapter(LayoutInflater inflater){
         this.inflater = inflater;
     }
-    private int countCLick = 0;
 
     @Override
     public View getInfoContents(final Marker m) {
@@ -88,6 +88,14 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             if(reportDate != null && !reportDate.equals("") && reportHour != null && !reportHour.equals("")) {
                 ((TextView) v.findViewById(R.id.info_window_date)).setText("Día: " + reportDate);
                 ((TextView) v.findViewById(R.id.info_window_hour)).setText("Hora: " + reportHour);
+            }
+
+            ((TextView) v.findViewById(R.id.info_window_state)).setText("Estado: "+report.getEnumState().getDescription());
+
+            if(report.getEnumState().equals(State.ACTIVE)) {
+                ((TextView) v.findViewById(R.id.info_window_inform)).setText("Reporta que el perro fue rescatado manteniendo presionado");
+            }else if(report.getEnumState().equals(State.RESCUED)){
+                ((TextView) v.findViewById(R.id.info_window_inform)).setText("Reporta que el perro sigue perdido manteniendo presionado");
             }
             return v;
         }

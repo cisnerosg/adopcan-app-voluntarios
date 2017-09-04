@@ -11,13 +11,29 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.DTO.CalendarInfo;
+import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.Service.CalendarInfoService;
 import com.adopcan.adopcan_voluntarios.Utils.DateUtils;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends AppCompatActivity implements  Response.ErrorListener, Response.Listener<String> {
 
     private CalendarInfoService calendarInfoService;
     private List<CalendarInfo> listCalendar;
@@ -47,10 +63,11 @@ public class CalendarActivity extends AppCompatActivity {
     private void initListDog(){
         calendarInfoService = new CalendarInfoService();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        listCalendar = calendarInfoService.getCalendarDogsByVoluntaryId(1);
-        ListView listView = (ListView)findViewById(R.id.listView_calendar);
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
+        Request<?> request = calendarInfoService.getCalendarDogs(this, this);
+        AppController.getInstance().addToRequestQueue(request);
+        //ListView listView = (ListView)findViewById(R.id.listView_calendar);
+        //CustomAdapter customAdapter = new CustomAdapter();
+        //listView.setAdapter(customAdapter);
     }
 
     class CustomAdapter extends BaseAdapter{
@@ -80,14 +97,61 @@ public class CalendarActivity extends AppCompatActivity {
             TextView textPlace = (TextView)view.findViewById(R.id.textView_place);
             TextView textDescription = (TextView)view.findViewById(R.id.textView_description);
 
-            imageView.setImageResource(R.drawable.makephoto);
-            textDate.setText(dateUtils.getDate(listCalendar.get(i).getEventDate()) + " " +dateUtils.getHour(listCalendar.get(i).getEventHour()));
+            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/prueba_599cbe20e44d1.png").resize(500, 500).into(imageView);
+            textDate.setText(listCalendar.get(i).getDate());
             textName.setText(listCalendar.get(i).getDog().getName());
             textPlace.setText(listCalendar.get(i).getPlace());
             textDescription.setText(listCalendar.get(i).getDescription());
 
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            try {
+                Date date = formatter.parse(listCalendar.get(i).getDate());
+                textDate.setText(dateUtils.getDate(date)+ " " + dateUtils.getHour(date));
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             return view;
         }
+    }
+
+    @Override
+    public void onResponse(String response) {
+
+        try {
+            listCalendar= getListFromJson(response);
+            ListView listView = (ListView)findViewById(R.id.listView_calendar);
+            CustomAdapter customAdapter = new CustomAdapter();
+            listView.setAdapter(customAdapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        if (error == null || error.networkResponse == null) {
+            return;
+        }
+
+        String body;
+        //get status code here
+        final String statusCode = String.valueOf(error.networkResponse.statusCode);
+        //get response body and parse with appropriate encoding
+        try {
+            body = new String(error.networkResponse.data,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // exception
+        }
+
+    }
+
+
+    private static final List<CalendarInfo> getListFromJson(String json) throws Exception {
+        Gson gson = new GsonBuilder().create();
+        Type typeOfList = new TypeToken<List<CalendarInfo>>(){}.getType();
+        return gson.fromJson(json, typeOfList);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.adopcan.adopcan_voluntarios.DTO;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -8,40 +10,34 @@ import java.util.Date;
 
 public class CalendarInfo {
 
-    private Long id;
-    private DogTemp dog;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("fecha")
+    private String date;
+    @SerializedName("lugar")
     private String place;
-    private Date eventDate;
-    private Date eventHour;
+    @SerializedName("descripcion")
     private String description;
+    @SerializedName("animal")
+    private DogTemp dog;
 
 
-
-    public CalendarInfo(Long id, Date eventDate,  Date eventHour, String description, DogTemp dog, String place) {
+    public CalendarInfo(String id, String date, String description, DogTemp dog, String place) {
         this.id = id;
-        this.eventDate = eventDate;
+        this.date = date;
         this.description = description;
         this.dog = dog;
-        this.eventHour = eventHour;
         this.place = place;
     }
 
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
     }
 
     public String getDescription() {
@@ -60,19 +56,19 @@ public class CalendarInfo {
         this.dog = dog;
     }
 
-    public Date getEventHour() {
-        return eventHour;
-    }
-
-    public void setEventHour(Date eventHour) {
-        this.eventHour = eventHour;
-    }
-
     public String getPlace() {
         return place;
     }
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
