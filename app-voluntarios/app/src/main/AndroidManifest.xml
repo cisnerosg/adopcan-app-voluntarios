@@ -45,9 +45,8 @@
 
         <activity
             android:name=".ReportMapsActivity"
-            android:label="Ubicación"
-            android:screenOrientation="portrait">
-            android:label="@string/title_activity_report_maps">
+            android:label="Ubicación">
+
         </activity>
         <activity
             android:name=".ReportLostDogDetailsActivity"
