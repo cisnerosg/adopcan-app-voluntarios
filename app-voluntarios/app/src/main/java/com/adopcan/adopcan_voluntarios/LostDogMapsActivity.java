@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.adopcan.adopcan_voluntarios.Adapter.CustomInfoWindowAdapter;
 import com.adopcan.adopcan_voluntarios.Adapter.CustomOnInfoWindowLongClickListenerAdapter;
-import com.adopcan.adopcan_voluntarios.Adapter.OnInfoWindowElemTouchListener;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
 import com.adopcan.adopcan_voluntarios.DTO.Report;

@@ -106,7 +106,7 @@ public class CalendarActivity extends AppCompatActivity implements  Response.Err
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
             try {
                 Date date = formatter.parse(listCalendar.get(i).getDate());
-                textDate.setText(dateUtils.getDate(date)+ " " + dateUtils.getHour(date));
+                textDate.setText(dateUtils.getDateWithDayDescription(date));
 
             } catch (ParseException e) {
                 e.printStackTrace();
