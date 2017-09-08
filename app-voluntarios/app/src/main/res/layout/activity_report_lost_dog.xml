@@ -26,19 +26,22 @@
 
     <ImageView
         android:id="@+id/imagePreview"
-        android:layout_width="0dp"
-        android:layout_height="294dp"
-        android:layout_marginBottom="92dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="130dp"
         android:background="@color/cardview_light_background"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/captureButton"
-        app:srcCompat="@drawable/makephoto" />
+        app:srcCompat="@drawable/makephoto"
+        android:layout_marginBottom="60dp" />
 
     <Button
         android:id="@+id/button4"
@@ -46,29 +49,33 @@
         android:layout_height="48dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:backgroundTint="@color/colorPrimary"
         android:onClick="openReportMap"
         android:text="SIGUIENTE"
-        android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/colorHintsWhite"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/imagePreview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <ImageButton
-        android:backgroundTint="@color/colorPrimary"
         android:id="@+id/captureButton"
-        android:layout_width="0dp"
-        android:layout_height="86dp"
-        android:onClick="openCamera"
-        app:srcCompat="@android:drawable/ic_menu_camera"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="openCamera"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
 </android.support.constraint.ConstraintLayout>
