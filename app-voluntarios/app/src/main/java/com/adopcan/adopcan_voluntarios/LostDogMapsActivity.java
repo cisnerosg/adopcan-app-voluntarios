@@ -1,6 +1,7 @@
 package com.adopcan.adopcan_voluntarios;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import com.adopcan.adopcan_voluntarios.Adapter.CustomInfoWindowAdapter;
 import com.adopcan.adopcan_voluntarios.Adapter.CustomOnInfoWindowLongClickListenerAdapter;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
+import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.DTO.TagReport;
 import com.adopcan.adopcan_voluntarios.DTO.Ubication;
@@ -34,6 +37,7 @@ import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.adopcan.adopcan_voluntarios.Service.AccessTokenService;
 import com.adopcan.adopcan_voluntarios.Service.ReportService;
+import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
 import com.adopcan.adopcan_voluntarios.Utils.JsonUtils;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -107,6 +111,15 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
 
         mMap.setOnInfoWindowLongClickListener(new CustomOnInfoWindowLongClickListenerAdapter(LayoutInflater.from(this)));
 
+        mMap.setOnInfoWindowCloseListener(new GoogleMap.OnInfoWindowCloseListener() {
+            @Override
+            public void onInfoWindowClose(Marker marker) {
+                TagReport tag = (TagReport) marker.getTag();
+                ConstraintLayout layout = (ConstraintLayout) ((Activity) tag.getContext()).findViewById(R.id.constraintLayout_tag);
+                layout.setVisibility(View.INVISIBLE);
+            }
+
+        });
         ReportService service = new ReportService();
 
         ////////////////////////////////////////////////////////////////
@@ -228,8 +241,10 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         mMap.animateCamera(ubication);
     }
 
+    public void changeState(View view){
+        AlertDialog alertDialog = new AlertDialog();
+        alertDialog.showAlertWithAcept(this, "Alerta", "Tenés que agregar un comentanrio, acordate que mientras mas describas más fácil lo podrán reconocer");
 
-
-
+    }
 
 }

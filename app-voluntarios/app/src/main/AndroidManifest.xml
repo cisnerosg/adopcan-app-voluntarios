@@ -59,8 +59,10 @@
             android:configChanges="screenSize|orientation"
             android:label="Ubicaciones" />
         <activity android:name=".InfoWindowMapActivity" />
-        <activity android:label="Mi Agenda"
-            android:name=".CalendarActivity"></activity>
+        <activity
+            android:name=".CalendarActivity"
+            android:label="Mi Agenda" />
+        <activity android:name=".DogsActivity"></activity>
     </application>
 
 </manifest>

@@ -27,7 +27,7 @@ public class DogService {
 
     public StringRequest getDogs(Response.Listener<String> responseListener, Response.ErrorListener errorListener) {
         List<Dog> list = new ArrayList<>();
-        String url = "http://www.adopcan.com/api/reporte";
+        String url = "http://www.adopcan.com/api/e93b4e5d-b617-40ee-97c7-2e67ac33843b/animales";
 
         HttpMethod httpMethod = new HttpMethod();
         return httpMethod.httpGetMethod(url,responseListener, errorListener);

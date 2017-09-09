@@ -38,7 +38,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void listDogs(View view){
-        Intent intent = new Intent(this, ListDogActivity.class);
+        Intent intent = new Intent(this, DogsActivity.class);
         startActivity(intent);
     }
 
