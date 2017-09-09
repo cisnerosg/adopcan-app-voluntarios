@@ -66,8 +66,14 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             ConstraintLayout layout = (ConstraintLayout) ((Activity) tag.getContext()).findViewById(R.id.constraintLayout_tag);
             layout.setVisibility(View.VISIBLE);
 
-            TextView textView = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_test);
-            textView.setText(report.getDescription());
+            TextView description = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_description);
+            description.setText(report.getDescription());
+
+            TextView date = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_date);
+            date.setText(report.getDate().toString());
+
+            TextView state = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_state);
+            date.setText(report.getState());
 
             View v = inflater.inflate(R.layout.activity_info_window_map, null);
             String[] info = m.getTitle().split("&");

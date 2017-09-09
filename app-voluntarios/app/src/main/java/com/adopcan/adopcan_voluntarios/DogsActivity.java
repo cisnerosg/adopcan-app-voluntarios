@@ -89,17 +89,17 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
             view = getLayoutInflater().inflate(R.layout.dog_list_info, null);
 
             ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
-            TextView textName = (TextView)view.findViewById(R.id.textViewNombre);
-            TextView textSexo = (TextView)view.findViewById(R.id.textViewSexo);
-            TextView textEdad = (TextView)view.findViewById(R.id.textViewEdad);
-            TextView textEstado = (TextView)view.findViewById(R.id.textViewEstado);
+            TextView textName = (TextView)view.findViewById(R.id.textView_name);
+//            TextView textSexo = (TextView)view.findViewById(R.id.textView);
+//            TextView textEdad = (TextView)view.findViewById(R.id.textView);
+//            TextView textEstado = (TextView)view.findViewById(R.id.textViewEstado);
 
 
             Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/prueba_599cbe20e44d1.png").resize(500, 500).into(imageView);
             textName.setText(dogs.get(i).getName());
-            textSexo.setText(dogs.get(i).getSex());
-            textEstado.setText(dogs.get(i).getState());
-            textEdad.setText(dogs.get(i).getEdad());
+//            textSexo.setText(dogs.get(i).getSex());
+//            textEstado.setText(dogs.get(i).getState());
+//            textEdad.setText(dogs.get(i).getEdad());
 
             return view;
         }
