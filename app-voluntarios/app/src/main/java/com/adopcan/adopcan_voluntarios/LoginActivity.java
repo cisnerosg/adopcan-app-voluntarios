@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.facebook.FacebookSdk;
 
+
 import java.io.UnsupportedEncodingException;
 
 public class LoginActivity extends AppCompatActivity implements Response.ErrorListener, Response.Listener<String> {
@@ -54,23 +55,25 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                info.setText(
-                        "User ID: "
-                                + loginResult.getAccessToken().getUserId()
-                                + "\n" +
-                                "Auth Token: "
-                                + loginResult.getAccessToken().getToken()
-                );
+//                info.setText(
+//                        "User ID: "
+//                                + loginResult.getAccessToken().getUserId()
+//                                + "\n" +
+//                                "Auth Token: "
+//                                + loginResult.getAccessToken().getToken()
+//                );
+                startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+
             }
 
             @Override
             public void onCancel() {
-                info.setText("Login attempt canceled.");
+                alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "Intento cancelado");
             }
 
             @Override
             public void onError(FacebookException e) {
-                info.setText("Login attempt failed.");
+                alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "Intento fallido");
             }
         });
 
@@ -129,4 +132,5 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 }
