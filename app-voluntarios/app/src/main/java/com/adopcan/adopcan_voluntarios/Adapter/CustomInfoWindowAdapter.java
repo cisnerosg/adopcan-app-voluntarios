@@ -1,12 +1,15 @@
 package com.adopcan.adopcan_voluntarios.Adapter;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
@@ -59,6 +62,12 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         if(tag != null && tag.getReport() != null) {
             Report report = tag.getReport();
+
+            ConstraintLayout layout = (ConstraintLayout) ((Activity) tag.getContext()).findViewById(R.id.constraintLayout_tag);
+            layout.setVisibility(View.VISIBLE);
+
+            TextView textView = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_test);
+            textView.setText(report.getDescription());
 
             View v = inflater.inflate(R.layout.activity_info_window_map, null);
             String[] info = m.getTitle().split("&");

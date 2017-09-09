@@ -17,6 +17,13 @@ public class DogTemp implements Serializable {
     private String id;
     @SerializedName("nombre")
     private String name;
+    @SerializedName("sexo")
+    private String sex;
+    @SerializedName("edad")
+    private String edad;
+    @SerializedName("estadp")
+    private String state;
+
     private Bitmap photo;
 
     public DogTemp(String id, String name) {
@@ -38,5 +45,29 @@ public class DogTemp implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
