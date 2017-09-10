@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
 //                                "Auth Token: "
 //                                + loginResult.getAccessToken().getToken()
 //                );
-                startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+                startActivity(new Intent(LoginActivity.this, UserMenuActivity.class));
 
             }
 
