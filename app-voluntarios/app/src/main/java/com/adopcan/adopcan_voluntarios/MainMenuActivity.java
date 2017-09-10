@@ -11,6 +11,7 @@ import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.R;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
+import com.facebook.login.LoginManager;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -54,6 +55,13 @@ public class MainMenuActivity extends AppCompatActivity {
 
     public void getCalendarInfo(View view){
         Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
+    }
+
+    public void logOut(View view){
+        this.finish();
+        LoginManager.getInstance().logOut();
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }
