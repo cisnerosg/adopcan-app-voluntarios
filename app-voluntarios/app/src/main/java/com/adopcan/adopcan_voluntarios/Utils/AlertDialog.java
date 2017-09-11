@@ -11,7 +11,7 @@ import android.support.v7.app.AlertDialog.Builder;
 
 public class AlertDialog {
 
-    public void showAlertWithAcept(Context context, String title, String description){
+    public void showAlertWithAcept(Context context, String title, String description) {
         Builder msg = new Builder(context);
         msg.setMessage(description);
         msg.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -24,5 +24,6 @@ public class AlertDialog {
         msg.create();
         msg.show();
     }
+
 
 }

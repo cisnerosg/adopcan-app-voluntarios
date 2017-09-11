@@ -1,6 +1,7 @@
 package com.adopcan.adopcan_voluntarios.Service;
 
 import com.adopcan.adopcan_voluntarios.DTO.Dog;
+import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 import com.adopcan.adopcan_voluntarios.ListDogActivity;
 import com.adopcan.adopcan_voluntarios.Mock.DogMock;
 import com.adopcan.adopcan_voluntarios.Utils.HttpMethod;
@@ -16,8 +17,8 @@ import java.util.List;
 
 public class DogService {
 
-    public List<Dog> getListDog(){
-        List<Dog> dogs = new ArrayList<Dog>();
+    public List<DogTemp> getListDog(){
+        List<DogTemp> dogs = new ArrayList<DogTemp>();
 
         DogMock mock = new DogMock();
         dogs = mock.getDogs();

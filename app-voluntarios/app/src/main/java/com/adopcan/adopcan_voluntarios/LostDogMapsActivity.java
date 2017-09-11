@@ -3,6 +3,7 @@ package com.adopcan.adopcan_voluntarios;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +33,10 @@ import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
 import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
+import com.adopcan.adopcan_voluntarios.DTO.State;
 import com.adopcan.adopcan_voluntarios.DTO.TagReport;
 import com.adopcan.adopcan_voluntarios.DTO.Ubication;
+import com.adopcan.adopcan_voluntarios.Mock.ReportMock;
 import com.adopcan.adopcan_voluntarios.Security.ReportTest;
 import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
@@ -194,19 +199,27 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     }
     @Override
     public void onErrorResponse(VolleyError error) {
-        if (error == null || error.networkResponse == null) {
-            return;
-        }
 
-        String body;
-        //get status code here
-        final String statusCode = String.valueOf(error.networkResponse.statusCode);
-        //get response body and parse with appropriate encoding
-        try {
-            body = new String(error.networkResponse.data,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            // exception
-        }
+        ReportMock mock = new ReportMock();
+        List<Report> listReport = mock.listMock();
+        fillMap(listReport);
+
+
+//        if (error == null || error.networkResponse == null) {
+//            return;
+//        }
+//
+//        String body;
+//        //get status code here
+//        final String statusCode = String.valueOf(error.networkResponse.statusCode);
+//        //get response body and parse with appropriate encoding
+//        try {
+//            body = new String(error.networkResponse.data,"UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            // exception
+//        }
+
+
 
     }
 
@@ -221,7 +234,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         for(Report r : reports) {
             LatLng coor = new LatLng(r.getLatitude(), r.getLongitude());
             CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor, 15);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(coor).title("Mi Ubicación").icon(BitmapDescriptorFactory.fromResource(dog)).snippet("Si querés cambiar la posición arrastrá el marcador"));
+            Marker marker = mMap.addMarker(new MarkerOptions().position(coor).title("Perro Seleccionado").icon(BitmapDescriptorFactory.fromResource(dog)));
 
             TagReport tag = new TagReport(r, this);
             marker.setTag(tag);
@@ -243,8 +256,36 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
 
     public void changeState(View view){
         AlertDialog alertDialog = new AlertDialog();
-        alertDialog.showAlertWithAcept(this, "Alerta", "Tenés que agregar un comentanrio, acordate que mientras mas describas más fácil lo podrán reconocer");
+        showAlertWithAceptAndCancel(this, "Alerta", "Estás seguro que vas a rescatar al perro seleccionado?");
 
+    }
+
+    public void showAlertWithAceptAndCancel(Context context, String title, String description) {
+
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+        builder.setTitle(title).
+
+                setMessage(description)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick (DialogInterface dialog,int which){
+                        //cambiar estado
+                        TextView textViewState = (TextView) findViewById(R.id.textView_description);
+                        textViewState.setText(State.RESCUED.getDescription());
+
+                        ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.constraintLayout_tag);
+                        layout.setVisibility(View.INVISIBLE);
+
+                        ReportMock mock = new ReportMock();
+                        List<Report> listReport = mock.listMock();
+                        fillMap(listReport);
+
+                    }
+                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick (DialogInterface dialog,int which){
+                // do nothing
+            }
+        }).setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
 }

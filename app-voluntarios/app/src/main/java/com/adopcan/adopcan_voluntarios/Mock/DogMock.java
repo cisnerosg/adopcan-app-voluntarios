@@ -18,10 +18,18 @@ public class DogMock {
     }
 
 
-    public List <Dog> getDogs(){
+    public List <DogTemp> getDogs(){
 
-        List<Dog> list = new ArrayList <>();
+        List<DogTemp> list = new ArrayList <DogTemp>();
 
+        DogTemp dog = new DogTemp("12","horacio");
+        list.add(dog);
+
+        dog = new DogTemp("13","hmaduro");
+        list.add(dog);
+
+        dog = new DogTemp("14","rogelio");
+        list.add(dog);
 
         return list;
     }

@@ -57,10 +57,11 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     @Override
     public View getInfoContents(final Marker m) {
 
-        //Carga layout personalizado.
+        //Carga layout en el mapa
         TagReport tag = (TagReport) m.getTag();
 
         if(tag != null && tag.getReport() != null) {
+
             Report report = tag.getReport();
 
             ConstraintLayout layout = (ConstraintLayout) ((Activity) tag.getContext()).findViewById(R.id.constraintLayout_tag);
@@ -70,49 +71,10 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             description.setText(report.getDescription());
 
             TextView date = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_date);
-            date.setText(report.getDate().toString());
-
-            TextView state = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_state);
-            date.setText(report.getState());
-
-            View v = inflater.inflate(R.layout.activity_info_window_map, null);
-            String[] info = m.getTitle().split("&");
-            String url = m.getSnippet();
-
-            ImageView imageView = v.findViewById(R.id.info_window_imagen);
-            String urlImage = "http://www.adopcan.com/uploads/" + report.getFilename();
-
-            if (not_first_time_showing_info_window) {
-                Picasso.with(tag.getContext()).load(urlImage).into(imageView);
-            } else { // if it's the first time, load the image with the callback set
-                not_first_time_showing_info_window=true;
-                Picasso.with(tag.getContext()).load(urlImage).into(imageView,new InfoWindowRefresher(m));
-            }
-
-
-            ((TextView) v.findViewById(R.id.info_window_description)).setText(report.getDescription());
-
             DateUtils dateUtils = new DateUtils();
-            Date dateReport =  dateUtils.getDateByString(report.getCreatedAt());
+            date.setText("Reportado el " + dateUtils.getDateDescription(report.getDate()));
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-            String reportDate = sdf.format(dateReport);
-
-            sdf = new SimpleDateFormat("H:mm");
-            String reportHour = sdf.format(dateReport);
-            if(reportDate != null && !reportDate.equals("") && reportHour != null && !reportHour.equals("")) {
-                ((TextView) v.findViewById(R.id.info_window_date)).setText("Día: " + reportDate);
-                ((TextView) v.findViewById(R.id.info_window_hour)).setText("Hora: " + reportHour);
-            }
-
-            ((TextView) v.findViewById(R.id.info_window_state)).setText("Estado: "+report.getEnumState().getDescription());
-
-            if(report.getEnumState().equals(State.ACTIVE)) {
-                ((TextView) v.findViewById(R.id.info_window_inform)).setText("Reporta que el perro fue rescatado manteniendo presionado");
-            }else if(report.getEnumState().equals(State.RESCUED)){
-                ((TextView) v.findViewById(R.id.info_window_inform)).setText("Reporta que el perro sigue perdido manteniendo presionado");
-            }
-            return v;
+            return null;
         }
         return null;
     }
@@ -140,5 +102,72 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     }
 
 }
+
+
+
+//    @Override
+//    public View getInfoContents(final Marker m) {
+//
+//        //Carga layout personalizado.
+//        TagReport tag = (TagReport) m.getTag();
+//
+//        if(tag != null && tag.getReport() != null) {
+//            Report report = tag.getReport();
+//
+//            ConstraintLayout layout = (ConstraintLayout) ((Activity) tag.getContext()).findViewById(R.id.constraintLayout_tag);
+//            layout.setVisibility(View.VISIBLE);
+//
+//            TextView description = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_description);
+//            description.setText(report.getDescription());
+//
+//            TextView date = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_date);
+//            date.setText(report.getDate().toString());
+//
+//            TextView state = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_state);
+//            date.setText(report.getEnumState().getDescription());
+//
+//            View v = inflater.inflate(R.layout.activity_info_window_map, null);
+//            String[] info = m.getTitle().split("&");
+//            String url = m.getSnippet();
+//
+//            ImageView imageView = v.findViewById(R.id.info_window_imagen);
+////            String urlImage = "http://www.adopcan.com/uploads/" + report.getFilename();
+//            String urlImage = "https://static.hogarmania.com/archivos/201505/perro-consejos-416x236x80xX.jpg";
+//
+//            if (not_first_time_showing_info_window) {
+//                Picasso.with(tag.getContext()).load(urlImage).into(imageView);
+//            } else { // if it's the first time, load the image with the callback set
+//                not_first_time_showing_info_window=true;
+//                Picasso.with(tag.getContext()).load(urlImage).into(imageView,new InfoWindowRefresher(m));
+//            }
+//
+//
+//            ((TextView) v.findViewById(R.id.info_window_description)).setText(report.getDescription());
+//
+//            DateUtils dateUtils = new DateUtils();
+//            Date dateReport =  dateUtils.getDateByString(report.getCreatedAt());
+//
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+//            String reportDate = sdf.format(dateReport);
+//
+//            sdf = new SimpleDateFormat("H:mm");
+//            String reportHour = sdf.format(dateReport);
+//            if(reportDate != null && !reportDate.equals("") && reportHour != null && !reportHour.equals("")) {
+//                ((TextView) v.findViewById(R.id.info_window_date)).setText("Día: " + reportDate);
+//                ((TextView) v.findViewById(R.id.info_window_hour)).setText("Hora: " + reportHour);
+//            }
+//
+//            ((TextView) v.findViewById(R.id.info_window_state)).setText("Estado: "+report.getEnumState().getDescription());
+//
+//            if(report.getEnumState().equals(State.ACTIVE)) {
+//                ((TextView) v.findViewById(R.id.info_window_inform)).setText("Reporta que el perro fue rescatado manteniendo presionado");
+//            }else if(report.getEnumState().equals(State.RESCUED)){
+//                ((TextView) v.findViewById(R.id.info_window_inform)).setText("Reporta que el perro sigue perdido manteniendo presionado");
+//            }
+//            return v;
+//        }
+//        return null;
+//    }
+
 
 

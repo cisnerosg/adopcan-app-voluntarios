@@ -15,6 +15,7 @@ import com.adopcan.adopcan_voluntarios.Adapter.DogListener;
 import com.adopcan.adopcan_voluntarios.ApiWebService.ApiInteractor;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.DTO.Dog;
+import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.R;
 import com.adopcan.adopcan_voluntarios.Service.DogService;
@@ -100,11 +101,11 @@ public class ListDogActivity extends AppCompatActivity implements Response.Error
 
         /////////////////////////////////////////////////////////////////
         //marcadores de perros perdidos
-        List<Dog> dogs = service.getListDog();
+        List<DogTemp> dogs = service.getListDog();
 
-        for(Dog r : dogs) {
+        for(DogTemp r : dogs) {
             if (r != null)
-                Log.v(TAG, "name=>" + r.getNombre() + " edad=>" + r.getEdad());
+                Log.v(TAG, "name=>" + r.getName() + " edad=>" + r.getEdad());
             else
                 Log.d("Error","No hay lista");
         }

@@ -9,10 +9,11 @@
         android:id="@+id/imageView"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_marginStart="5dp"
         app:srcCompat="@mipmap/ic_launcher"
-        android:layout_below="@+id/textView_date"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/textView_name"
@@ -21,12 +22,12 @@
         android:text="Manchitas"
         android:padding="5dp"
         android:textSize="20dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/imageView"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_raza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12dp"
@@ -37,25 +38,27 @@
         android:text="Mestizo" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="12dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView2"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="Tamaño medio" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView8"
         android:textSize="12dp"
         android:padding="5dp"
         android:text="5 años"
+        android:layout_below="@+id/textView_raza"
+        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Ver mas..."
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/colorHintsWhite"
+        android:textSize="10dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp" />
 
 
 </RelativeLayout>

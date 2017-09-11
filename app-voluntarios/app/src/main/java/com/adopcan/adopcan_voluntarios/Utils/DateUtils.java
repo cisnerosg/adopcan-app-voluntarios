@@ -19,7 +19,13 @@ public class DateUtils {
 
     public String getDateWithDayDescription(Date date){
         Locale locale = new Locale("es","ES");
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE d MMMM  H:mm 'hs' ", locale);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE d MMMM 'a las' H:mm 'hs' ", locale);
+        return  sdf.format(date);
+    }
+
+    public String getDateDescription(Date date){
+        Locale locale = new Locale("es","ES");
+        SimpleDateFormat sdf = new SimpleDateFormat("d MMM 'a las' H:mm 'hs' ", locale);
         return  sdf.format(date);
     }
 

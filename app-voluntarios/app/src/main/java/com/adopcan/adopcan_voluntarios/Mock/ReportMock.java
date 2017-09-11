@@ -1,6 +1,7 @@
 package com.adopcan.adopcan_voluntarios.Mock;
 
 import com.adopcan.adopcan_voluntarios.DTO.Report;
+import com.adopcan.adopcan_voluntarios.DTO.State;
 import com.adopcan.adopcan_voluntarios.DTO.Ubication;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class ReportMock {
         report.setLatitude(lat);
         report.setLongitude(lon);
         report.setDate(fecha);
+        report.setFilename("https://static.hogarmania.com/archivos/201505/perro-consejos-416x236x80xX.jpg");
+        report.setState(State.ACTIVE.getId());
 
         return report;
 
