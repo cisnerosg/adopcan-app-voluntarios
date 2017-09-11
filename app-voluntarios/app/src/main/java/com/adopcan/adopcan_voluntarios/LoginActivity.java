@@ -20,9 +20,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
@@ -51,31 +53,36 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
         info = (TextView)findViewById(R.id.info);
-        loginButton = (LoginButton)findViewById(R.id.login_button);
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-//                info.setText(
-//                        "User ID: "
-//                                + loginResult.getAccessToken().getUserId()
-//                                + "\n" +
-//                                "Auth Token: "
-//                                + loginResult.getAccessToken().getToken()
-//                );
-                startActivity(new Intent(LoginActivity.this, UserMenuActivity.class));
+        if(Profile.getCurrentProfile() != null && AccessToken.getCurrentAccessToken() != null){
+            //Está logueado en Facebook, asique va directo al menú
+            startActivity(new Intent(LoginActivity.this, UserMenuActivity.class));
+        } else {
+            loginButton = (LoginButton)findViewById(R.id.login_button);
+            loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    //                info.setText(
+                    //                        "User ID: "
+                    //                                + loginResult.getAccessToken().getUserId()
+                    //                                + "\n" +
+                    //                                "Auth Token: "
+                    //                                + loginResult.getAccessToken().getToken()
+                    //                );
+                    startActivity(new Intent(LoginActivity.this, UserMenuActivity.class));
 
-            }
+                }
 
-            @Override
-            public void onCancel() {
-                alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "Intento cancelado");
-            }
+                @Override
+                public void onCancel() {
+                    alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "Intento cancelado");
+                }
 
-            @Override
-            public void onError(FacebookException e) {
-                alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "Intento fallido");
-            }
-        });
+                @Override
+                public void onError(FacebookException e) {
+                    alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "Intento fallido");
+                }
+            });
+        }
 
     }
 
