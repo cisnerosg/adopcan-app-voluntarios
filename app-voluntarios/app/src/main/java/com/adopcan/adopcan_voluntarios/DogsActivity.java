@@ -1,5 +1,6 @@
 package com.adopcan.adopcan_voluntarios;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.DTO.CalendarInfo;
@@ -31,6 +34,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static android.support.constraint.R.id.parent;
+
 
 public class DogsActivity extends AppCompatActivity implements  Response.ErrorListener, Response.Listener<String>{
 
@@ -76,7 +82,7 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
 
         @Override
         public Object getItem(int i) {
-            return null;
+            return dogs.get(i);
         }
 
         @Override
@@ -100,6 +106,15 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
 //            textSexo.setText(dogs.get(i).getSex());
 //            textEstado.setText(dogs.get(i).getState());
 //            textEdad.setText(dogs.get(i).getEdad());
+
+            Button button = (Button)view.findViewById(R.id.button_more);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(view.getContext(), DogDetailActivity.class);
+                    startActivity(intent);                }
+            });
 
             return view;
         }

@@ -45,9 +45,7 @@
 
         <activity
             android:name=".ReportMapsActivity"
-            android:label="Ubicación">
-
-        </activity>
+            android:label="Ubicación"></activity>
         <activity
             android:name=".ReportLostDogDetailsActivity"
             android:label="Descripción" />
@@ -61,23 +59,28 @@
         <activity android:name=".InfoWindowMapActivity" />
         <activity
             android:name=".CalendarActivity"
-            android:label="Mi Agenda" />
-        <activity android:name=".DogsActivity"></activity>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-
+            android:label="Mis Tareas" />
+        <activity android:name=".DogsActivity"
+            android:label="Mis Perros"/>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".UserMenuActivity"
             android:label="Menu Principal"
             android:screenOrientation="portrait" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
-        <!--<provider android:authorities="com.facebook.app.FacebookContentProvider{1530763970321728}"-->
-            <!--android:name="com.facebook.FacebookContentProvider"-->
-            <!--android:exported="true"/>-->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <!-- <provider android:authorities="com.facebook.app.FacebookContentProvider{1530763970321728}" -->
+        <!-- android:name="com.facebook.FacebookContentProvider" -->
+        <!-- android:exported="true"/> -->
+        <activity android:name=".DogDetailActivity"
+            android:label="Ficha" />
     </application>
 
 </manifest>

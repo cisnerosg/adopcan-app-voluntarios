@@ -49,16 +49,16 @@
         android:layout_toEndOf="@+id/imageView" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_more"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text="Ver mas..."
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/colorHintsWhite"
-        android:textSize="10dp"
-        android:layout_below="@+id/textView"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="8dp" />
+        android:layout_below="@+id/textView"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Ver mas..."
+        android:textColor="@color/colorHintsWhite"
+        android:textSize="8dp" />
 
 
 </RelativeLayout>
