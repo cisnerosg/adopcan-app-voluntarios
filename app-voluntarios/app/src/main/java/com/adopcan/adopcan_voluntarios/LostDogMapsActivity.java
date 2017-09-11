@@ -70,6 +70,7 @@ import java.util.List;
 
 import static android.R.attr.tag;
 import static com.adopcan.adopcan_voluntarios.R.drawable.dog;
+import static com.adopcan.adopcan_voluntarios.R.drawable.markerboy;
 
 public class LostDogMapsActivity extends AppCompatActivity implements OnMapReadyCallback, Response.ErrorListener, Response.Listener<String> {
 
@@ -250,7 +251,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
             marker.remove();
         }
 
-        marker = mMap.addMarker(new MarkerOptions().position(coor).title("Mi Ubicación").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)).draggable(true));
+        marker = mMap.addMarker(new MarkerOptions().position(coor).title("Mi Ubicación").icon(BitmapDescriptorFactory.fromResource(markerboy)).draggable(true));
         mMap.animateCamera(ubication);
     }
 

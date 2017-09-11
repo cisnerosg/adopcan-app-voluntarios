@@ -72,7 +72,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
             TextView date = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_date);
             DateUtils dateUtils = new DateUtils();
-            date.setText("Reportado el " + dateUtils.getDateDescription(report.getDate()));
+            date.setText("Reportado el " + dateUtils.getDateDescription(new Date()));
 
             return null;
         }
