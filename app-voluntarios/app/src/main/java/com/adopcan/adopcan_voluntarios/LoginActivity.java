@@ -132,9 +132,6 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
             // exception
         }
         alertDialog.showAlertWithAcept(this, "Alerta", "El usuario o la contraseña no son válidos");
-
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        startActivity(intent);
     }
 
     @Override

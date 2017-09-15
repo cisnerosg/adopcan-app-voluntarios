@@ -44,6 +44,8 @@ import com.adopcan.adopcan_voluntarios.Service.AccessTokenService;
 import com.adopcan.adopcan_voluntarios.Service.ReportService;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
 import com.adopcan.adopcan_voluntarios.Utils.JsonUtils;
+import com.adopcan.adopcan_voluntarios.Volley.VolleyMultipartRequest;
+import com.adopcan.adopcan_voluntarios.Volley.VolleySingleton;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -201,24 +203,19 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     @Override
     public void onErrorResponse(VolleyError error) {
 
-        ReportMock mock = new ReportMock();
-        List<Report> listReport = mock.listMock();
-        fillMap(listReport);
+        if (error == null || error.networkResponse == null) {
+            return;
+        }
 
-
-//        if (error == null || error.networkResponse == null) {
-//            return;
-//        }
-//
-//        String body;
-//        //get status code here
-//        final String statusCode = String.valueOf(error.networkResponse.statusCode);
-//        //get response body and parse with appropriate encoding
-//        try {
-//            body = new String(error.networkResponse.data,"UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            // exception
-//        }
+        String body;
+        //get status code here
+        final String statusCode = String.valueOf(error.networkResponse.statusCode);
+        //get response body and parse with appropriate encoding
+        try {
+            body = new String(error.networkResponse.data,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // exception
+        }
 
 
 
@@ -257,8 +254,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
 
     public void changeState(View view){
         AlertDialog alertDialog = new AlertDialog();
-        showAlertWithAceptAndCancel(this, "Alerta", "Estás seguro que vas a rescatar al perro seleccionado?");
-
+        showAlertWithAceptAndCancel(this, "Alerta", "Estás seguro que vas a rescatar al perro seleccionado? Una vez realizada la operación el perro dejará de aparecer en el mapa.");
     }
 
     public void showAlertWithAceptAndCancel(Context context, String title, String description) {
@@ -276,9 +272,12 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
                         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.constraintLayout_tag);
                         layout.setVisibility(View.INVISIBLE);
 
-                        ReportMock mock = new ReportMock();
-                        List<Report> listReport = mock.listMock();
-                        fillMap(listReport);
+                        Toast.makeText(getApplicationContext(), "El rescate fue reportado, gracias por colaborar!",
+                                    Toast.LENGTH_SHORT).show();
+
+                        ReportService reportService = new ReportService();
+                        //VolleyMultipartRequest multipartRequest = reportService.editReport(tag.getReport());
+                        //VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(multipartRequest);
 
                     }
                 }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

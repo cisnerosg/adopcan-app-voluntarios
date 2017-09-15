@@ -111,6 +111,7 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
                 NetworkResponse networkResponse = error.networkResponse;
                 String errorMessage = "Unknown error";
                 Log.i("envio reporte correcto",errorMessage);
+                alertDialog.showAlertWithAcept(getApplicationContext(), "Alerta","hubo un problema en la aplicación, intentalo mas tarde");
 
             }
         }) {

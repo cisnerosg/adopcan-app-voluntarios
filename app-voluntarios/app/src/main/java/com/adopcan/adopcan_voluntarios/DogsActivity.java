@@ -135,11 +135,6 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
     }
     @Override
     public void onErrorResponse(VolleyError error) {
-        DogService dogService = new DogService();
-        dogs = dogService.getListDog();
-        ListView listView = (ListView)findViewById(R.id.listView_dogs);
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
 
         if (error == null || error.networkResponse == null) {
             return;

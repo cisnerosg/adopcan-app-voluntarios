@@ -40,6 +40,7 @@ import java.util.Date;
 import java.util.List;
 
 import static android.R.attr.tag;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by german on 12/8/2017.
@@ -73,6 +74,9 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             TextView date = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_date);
             DateUtils dateUtils = new DateUtils();
             date.setText("Reportado el " + dateUtils.getDateDescription(new Date()));
+
+            ImageView imageView = (ImageView) ((Activity) tag.getContext()).findViewById(R.id.imageView_dog);
+            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + report.getFilename()).into(imageView);
 
             return null;
         }
