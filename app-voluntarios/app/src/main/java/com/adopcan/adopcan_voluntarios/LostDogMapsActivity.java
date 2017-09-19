@@ -123,8 +123,10 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
             @Override
             public void onInfoWindowClose(Marker marker) {
                 TagReport tag = (TagReport) marker.getTag();
-                ConstraintLayout layout = (ConstraintLayout) ((Activity) tag.getContext()).findViewById(R.id.constraintLayout_tag);
-                layout.setVisibility(View.INVISIBLE);
+                if(tag != null && tag.getReport() != null) {
+                    ConstraintLayout layout = (ConstraintLayout) ((Activity) tag.getContext()).findViewById(R.id.constraintLayout_tag);
+                    layout.setVisibility(View.INVISIBLE);
+                }
             }
 
         });
@@ -242,7 +244,9 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
 
         /*Mi ubicacion*/
         Ubication myUbication = myUbication();
-        LatLng coor = new LatLng(myUbication.getLatitud(), myUbication.getLongitud());
+        Double corrimiento = 0.000000007;
+
+        LatLng coor = new LatLng(myUbication.getLatitud() + corrimiento , myUbication.getLongitud());
         CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor,17);
         if (marker != null) {
             marker.remove();

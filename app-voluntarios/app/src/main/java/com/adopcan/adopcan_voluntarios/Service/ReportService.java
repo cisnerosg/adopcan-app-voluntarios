@@ -112,8 +112,8 @@ public class ReportService {
     }
 
     private String getCoords(Report report){
-        String lat = Double.toString(report.getLatitude() + 8 );
-        String lon = Double.toString(report.getLongitude() + 4);
+        String lat = Double.toString(report.getLatitude());
+        String lon = Double.toString(report.getLongitude());
 
         return lat + "," + lon;
     }
