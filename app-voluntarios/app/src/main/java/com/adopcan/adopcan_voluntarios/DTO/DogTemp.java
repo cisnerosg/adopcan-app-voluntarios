@@ -23,6 +23,8 @@ public class DogTemp implements Serializable {
     private String edad;
     @SerializedName("estadp")
     private String state;
+    @SerializedName("foto")
+    private String filename;
 
     private Bitmap photo;
 
@@ -69,5 +71,13 @@ public class DogTemp implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

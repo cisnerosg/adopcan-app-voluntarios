@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 import static android.support.constraint.R.id.parent;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class DogsActivity extends AppCompatActivity implements  Response.ErrorListener, Response.Listener<String>{
@@ -100,8 +101,8 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
 //            TextView textEdad = (TextView)view.findViewById(R.id.textView);
 //            TextView textEstado = (TextView)view.findViewById(R.id.textViewEstado);
 
+            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + dogs.get(i).getFilename()).into(imageView);
 
-            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/prueba_599cbe20e44d1.png").resize(500, 500).into(imageView);
             textName.setText(dogs.get(i).getName());
 //            textSexo.setText(dogs.get(i).getSex());
 //            textEstado.setText(dogs.get(i).getState());

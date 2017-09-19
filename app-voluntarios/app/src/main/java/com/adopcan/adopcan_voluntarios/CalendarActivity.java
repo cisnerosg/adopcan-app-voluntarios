@@ -97,7 +97,7 @@ public class CalendarActivity extends AppCompatActivity implements  Response.Err
             TextView textPlace = (TextView)view.findViewById(R.id.textView_place);
             TextView textDescription = (TextView)view.findViewById(R.id.textView_description);
 
-            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/prueba_599cbe20e44d1.png").resize(500, 500).into(imageView);
+            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + listCalendar.get(i).getDog().getFilename()).into(imageView);
             textDate.setText(listCalendar.get(i).getDate());
             textName.setText(listCalendar.get(i).getDog().getName());
             textPlace.setText(listCalendar.get(i).getPlace());
