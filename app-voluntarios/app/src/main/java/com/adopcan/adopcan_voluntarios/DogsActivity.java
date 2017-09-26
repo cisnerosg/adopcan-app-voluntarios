@@ -19,6 +19,7 @@ import com.adopcan.adopcan_voluntarios.DTO.CalendarInfo;
 import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 import com.adopcan.adopcan_voluntarios.Service.CalendarInfoService;
 import com.adopcan.adopcan_voluntarios.Service.DogService;
+import com.adopcan.adopcan_voluntarios.Utils.Circle;
 import com.adopcan.adopcan_voluntarios.Utils.DateUtils;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -92,7 +93,7 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(final int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.dog_list_info, null);
 
             ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
@@ -101,7 +102,7 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
 //            TextView textEdad = (TextView)view.findViewById(R.id.textView);
 //            TextView textEstado = (TextView)view.findViewById(R.id.textViewEstado);
 
-            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + dogs.get(i).getFilename()).into(imageView);
+            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + dogs.get(i).getFilename()).transform(new Circle()).into(imageView);
 
             textName.setText(dogs.get(i).getName());
 //            textSexo.setText(dogs.get(i).getSex());
@@ -114,6 +115,7 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
                 public void onClick(View view) {
 
                     Intent intent = new Intent(view.getContext(), DogDetailActivity.class);
+                    intent.putExtra ("dog", dogs.get(i));
                     startActivity(intent);                }
             });
 

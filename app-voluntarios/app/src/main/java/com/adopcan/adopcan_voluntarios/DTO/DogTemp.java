@@ -17,12 +17,24 @@ public class DogTemp implements Serializable {
     private String id;
     @SerializedName("nombre")
     private String name;
+    @SerializedName("estado")
+    private String state;
     @SerializedName("sexo")
     private String sex;
     @SerializedName("edad")
     private String edad;
-    @SerializedName("estadp")
-    private String state;
+    @SerializedName("castrado")
+    private String castrated;
+    @SerializedName("color")
+    private String color;
+    @SerializedName("necesidades")
+    private String needs;
+    @SerializedName("dieta")
+    private String diet;
+    @SerializedName("fechaIngreso")
+    private String admissionDate;
+    @SerializedName("notas")
+    private String notes;
     @SerializedName("foto")
     private String filename;
 
@@ -79,5 +91,53 @@ public class DogTemp implements Serializable {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public String getCastrated() {
+        return castrated;
+    }
+
+    public void setCastrated(String castrated) {
+        this.castrated = castrated;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getNeeds() {
+        return needs;
+    }
+
+    public void setNeeds(String needs) {
+        this.needs = needs;
+    }
+
+    public String getDiet() {
+        return diet;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
+    }
+
+    public String getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public void setAdmissionDate(String admissionDate) {
+        this.admissionDate = admissionDate;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
