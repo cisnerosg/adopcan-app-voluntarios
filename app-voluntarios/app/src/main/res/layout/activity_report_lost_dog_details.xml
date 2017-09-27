@@ -46,7 +46,6 @@
         android:layout_width="365dp"
         android:layout_height="34dp"
         android:backgroundTint="@color/colorPrimary"
-        android:onClick="sendReport"
         android:text="facebook"
         android:textColor="@color/colorHintsWhite"
         app:layout_constraintLeft_toLeftOf="parent"

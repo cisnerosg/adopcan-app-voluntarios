@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
@@ -29,6 +30,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,10 +42,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.R.attr.min;
+
 public class ReportLostDogDetailsActivity extends AppCompatActivity {
 
     private Report report;
     private com.adopcan.adopcan_voluntarios.Utils.AlertDialog alertDialog;
+
+    //FB
+    JSONObject response, profile_pic_data, profile_pic_url;
+    int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    ShareDialog shareDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,6 +61,25 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
         alertDialog = new com.adopcan.adopcan_voluntarios.Utils.AlertDialog();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_lost_dog_details);
+
+        //FB
+        Button button = (Button) findViewById(R.id.buttonFB);
+        shareDialog = new ShareDialog(this);  // initialize facebook shareDialog.
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ShareDialog.canShow(ShareLinkContent.class)) {
+                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                            .setContentTitle("Android Facebook Integration and Login Tutorial")
+                            .setImageUrl(Uri.parse("https://www.studytutorial.in/wp-content/uploads/2017/02/FacebookLoginButton-min-300x136.png"))
+                                            .setContentDescription(
+                                                    "This tutorial explains how to integrate Facebook and Login through Android Application")
+                                                            .setContentUrl(Uri.parse("https://www.studytutorial.in/android-facebook-integration-and-login-tutorial"))
+                                                                            .build();
+                    shareDialog.show(linkContent);  // Show facebook ShareDialog
+                }
+            }
+        });
 
     }
 
@@ -151,5 +181,9 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
         String lon = Double.toString(report.getLongitude() + 4);
 
         return lat + "," + lon;
+    }
+
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
