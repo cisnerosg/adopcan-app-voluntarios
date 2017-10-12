@@ -26,8 +26,8 @@
 
     <ImageView
         android:id="@+id/imagePreview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="352dp"
+        android:layout_height="307dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -36,12 +36,13 @@
         android:background="@color/cardview_light_background"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/captureButton"
         app:srcCompat="@drawable/makephoto"
-        android:layout_marginBottom="60dp" />
+        android:layout_marginBottom="60dp"
+        app:layout_constraintVertical_bias="0.661" />
 
     <Button
         android:id="@+id/button4"
@@ -63,7 +64,7 @@
 
     <ImageButton
         android:id="@+id/captureButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="59dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"

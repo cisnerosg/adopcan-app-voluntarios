@@ -7,4 +7,10 @@
     <string name="edad_lbl">Edad:</string>
     <string name="dog_list_title_lbl">Mis Perros</string>
     <string name="facebook_app_id">1530763970321728</string>
+    <string name="title_activity_solapa">SolapaActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Cerrar Sesión</string>
 </resources>

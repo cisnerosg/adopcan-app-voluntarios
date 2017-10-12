@@ -45,7 +45,7 @@
 
         <activity
             android:name=".ReportMapsActivity"
-            android:label="Ubicación"></activity>
+            android:label="Ubicación" />
         <activity
             android:name=".ReportLostDogDetailsActivity"
             android:label="Descripción" />
@@ -60,8 +60,9 @@
         <activity
             android:name=".CalendarActivity"
             android:label="Mis Tareas" />
-        <activity android:name=".DogsActivity"
-            android:label="Mis Perros"/>
+        <activity
+            android:name=".DogsActivity"
+            android:label="Mis Perros" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -79,8 +80,14 @@
         <!-- <provider android:authorities="com.facebook.app.FacebookContentProvider{1530763970321728}" -->
         <!-- android:name="com.facebook.FacebookContentProvider" -->
         <!-- android:exported="true"/> -->
-        <activity android:name=".DogDetailActivity"
+        <activity
+            android:name=".DogDetailActivity"
             android:label="Ficha" />
+        <activity
+            android:name=".SolapaActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TabsDogsActivity"></activity>
     </application>
 
 </manifest>

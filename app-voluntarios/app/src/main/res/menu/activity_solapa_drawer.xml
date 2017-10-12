@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/calendartrans"
+            android:title="Mis Tareas" />
+        <item
+            android:id="@+id/nav_dogs"
+            android:icon="@drawable/pichicho"
+            android:title="Mis Perros" />
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@drawable/reporttrans"
+            android:title="Reportar Perro Perdido" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/locationtrans"
+            android:title="Ver Mapa Perros Perdidos" />
+    </group>
+
+</menu>

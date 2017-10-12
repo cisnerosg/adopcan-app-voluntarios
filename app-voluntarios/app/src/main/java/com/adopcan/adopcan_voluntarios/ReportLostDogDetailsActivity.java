@@ -88,7 +88,7 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
     }
 
     private void login(){
-        Intent intent = new Intent(this, MainMenuActivity.class);
+        Intent intent = new Intent(this, SolapaActivity.class);
         MessageAlert msg = new MessageAlert("Gracias!!","Hemos recibido tu reporte, con tu ayuda muchos perros podrán encontrar un hogar");
         intent.putExtra ("message", msg);
         startActivity(intent);

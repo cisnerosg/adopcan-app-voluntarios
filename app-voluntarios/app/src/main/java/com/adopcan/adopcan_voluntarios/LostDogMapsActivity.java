@@ -81,7 +81,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     private double lat = 0.0;
     private double lon = 0.0;
     private JsonUtils jsonUtils;
-
+    private List<Report> listReport = new ArrayList<Report>();
     private LayoutInflater inflater;
 
     public LostDogMapsActivity() {
@@ -137,6 +137,8 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
         ReportService reportService = new ReportService();
         Request<?> request = reportService.getReports(this, this);
         AppController.getInstance().addToRequestQueue(request);
+
+
     }
 
 
@@ -192,7 +194,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     @Override
     public void onResponse(String response) {
 
-        List<Report> listReport = new ArrayList<Report>();
+
 
         try {
             listReport= getListFromJson(response);
@@ -231,6 +233,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void fillMap(List<Report> reports){
+        mMap.clear();
         for(Report r : reports) {
             LatLng coor = new LatLng(r.getLatitude(), r.getLongitude());
             CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor, 15);
@@ -244,7 +247,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
 
         /*Mi ubicacion*/
         Ubication myUbication = myUbication();
-        Double corrimiento = 0.000000007;
+        Double corrimiento = 0.00000001;
 
         LatLng coor = new LatLng(myUbication.getLatitud() + corrimiento , myUbication.getLongitud());
         CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor,17);
@@ -273,15 +276,20 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
                         TextView textViewState = (TextView) findViewById(R.id.textView_description);
                         textViewState.setText(State.RESCUED.getDescription());
 
+                        TextView textViewReportId = (TextView) findViewById(R.id.TextView_reportId);
+                        String id = (String) textViewReportId.getText();
+
                         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.constraintLayout_tag);
                         layout.setVisibility(View.INVISIBLE);
 
-                        Toast.makeText(getApplicationContext(), "El rescate fue reportado, gracias por colaborar!",
+                        Toast.makeText(getApplicationContext(), "El rescate fue reportado con éxito, gracias por colaborar!",
                                     Toast.LENGTH_SHORT).show();
 
                         ReportService reportService = new ReportService();
-                        //VolleyMultipartRequest multipartRequest = reportService.editReport(tag.getReport());
-                        //VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(multipartRequest);
+                        VolleyMultipartRequest multipartRequest = reportService.changeStateReport(id,State.RESCUED);
+                        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(multipartRequest);
+
+                        updateReportById(id);
 
                     }
                 }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -292,4 +300,16 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
                 .show();
     }
 
+
+    private void updateReportById(String id){
+        for(Report r : listReport){
+            if(r.getId().equals(id)){
+                listReport.remove(r);
+                break;
+            }
+        }
+
+        fillMap(listReport);
+
+    }
 }
