@@ -32,6 +32,8 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ReportLostDogActivity extends AppCompatActivity {
@@ -52,12 +54,7 @@ public class ReportLostDogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_lost_dog);
 
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            }
-        }
+
     }
 
 
@@ -75,8 +72,45 @@ public class ReportLostDogActivity extends AppCompatActivity {
 
     public void openCamera(View view) {
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, 1);
+        if (Build.VERSION.SDK_INT >= 23) {
+            int permissionCheckWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            int permissionCheckCamera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
 
+            List<String> permissions = new ArrayList<>();
+
+            if (permissionCheckWrite != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+
+            if (permissionCheckCamera != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.CAMERA);
+            }
+
+            if(!permissions.isEmpty()) {
+                String[] array = permissions.toArray(new String[0]);
+                ActivityCompat.requestPermissions(this, array , 1);
+            }else{
+                startCamera();
+            }
+        }
+
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+        for(int i=0; i<grantResults.length; i++){
+            if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                return;
+            }
+        }
+        startCamera();
+
+    }
+
+    private void startCamera(){
         captureBtn = (ImageButton) findViewById(R.id.captureButton);
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
+import com.adopcan.adopcan_voluntarios.DTO.State;
 import com.adopcan.adopcan_voluntarios.Mock.ReportMock;
 import com.adopcan.adopcan_voluntarios.R;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
@@ -60,6 +61,11 @@ public class ReportService {
         String url = "http://www.adopcan.com/api/reporte/" + report.getId();
         return sendReport(report, url, false);
     }
+    public VolleyMultipartRequest changeStateReport(String id, State state){
+        String url = "http://www.adopcan.com/api/reporte/" + id + "/estado/" + state.getId();
+        return sendChangeState(url, false);
+    }
+
 
     private VolleyMultipartRequest sendReport(final Report report, String url, final boolean withImage) {
         // loading or check internet connection or something...
@@ -117,5 +123,37 @@ public class ReportService {
 
         return lat + "," + lon;
     }
+
+    private VolleyMultipartRequest sendChangeState(String url, final boolean withImage) {
+        // loading or check internet connection or something...
+        // ... then
+
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
+            @Override
+            public void onResponse(NetworkResponse response) {
+                String resultResponse = new String(response.data);
+                Log.i("envio reporte correcto",resultResponse);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse networkResponse = error.networkResponse;
+                String errorMessage = "Unknown error";
+                Log.i("envio reporte correcto",errorMessage);
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", SecurityHandler.getSecurity().getUser().getResponseToken().getAutorization());
+                return headers;
+            }
+
+        };
+        return multipartRequest;
+    }
+
 
 }

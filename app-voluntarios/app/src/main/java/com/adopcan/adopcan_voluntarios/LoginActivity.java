@@ -113,11 +113,15 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
         user.addResponseToken(responseToken);
         SecurityHandler.getInstance(user);
 
-        Intent intent = new Intent(this, MainMenuActivity.class);
+        Intent intent = new Intent(this, SolapaActivity.class);
         startActivity(intent);
     }
     @Override
     public void onErrorResponse(VolleyError error) {
+
+        Intent intent = new Intent(this, SolapaActivity.class);
+        startActivity(intent);
+
         if (error == null || error.networkResponse == null) {
             return;
         }
