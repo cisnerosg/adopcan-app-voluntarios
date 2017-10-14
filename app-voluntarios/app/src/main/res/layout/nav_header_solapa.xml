@@ -17,6 +17,7 @@
         android:layout_width="135dp"
         android:layout_height="123dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:layout_gravity="center"
         app:srcCompat="@drawable/adopcan" />
 
 

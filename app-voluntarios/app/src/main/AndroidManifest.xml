@@ -80,11 +80,15 @@
         <activity
             android:name=".DogDetailActivity"
             android:label="Ficha" />
+
         <activity
             android:name=".SolapaActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TabsDogsActivity"></activity>
+
+        <activity android:name=".TabsDogsActivity"
+            android:label="Perros Refugiados"/>
+
     </application>
 
     <provider android:authorities="com.facebook.app.FacebookContentProvider1530763970321728"
