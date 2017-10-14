@@ -2,6 +2,7 @@ package com.adopcan.adopcan_voluntarios;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +31,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.facebook.share.ShareApi;
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -68,16 +72,28 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ShareDialog.canShow(ShareLinkContent.class)) {
-                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                            .setContentTitle("Android Facebook Integration and Login Tutorial")
-                            .setImageUrl(Uri.parse("https://www.studytutorial.in/wp-content/uploads/2017/02/FacebookLoginButton-min-300x136.png"))
-                                            .setContentDescription(
-                                                    "This tutorial explains how to integrate Facebook and Login through Android Application")
-                                                            .setContentUrl(Uri.parse("https://www.studytutorial.in/android-facebook-integration-and-login-tutorial"))
-                                                                            .build();
-                    shareDialog.show(linkContent);  // Show facebook ShareDialog
-                }
+                Bitmap bitmap = BitmapFactory.decodeByteArray(report.getPhotoByte(), 0, report.getPhotoByte().length);
+                SharePhoto photo = new SharePhoto.Builder()
+                        .setBitmap(bitmap)
+                        .build();
+
+                SharePhotoContent content = new SharePhotoContent.Builder()
+                        .addPhoto(photo)
+                        .build();
+
+                shareDialog.show(content);
+//                ShareApi.share(content, null);
+
+    //                if (ShareDialog.canShow(ShareLinkContent.class)) {
+//                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+//                            .setContentTitle("UNA DESCRIPCION")
+//                            .setImageUrl(Uri.parse("https://www.studytutorial.in/wp-content/uploads/2017/02/FacebookLoginButton-min-300x136.png"))
+//                                            .setContentDescription(
+//                                                    "La descripcion")
+//                                                            .setContentUrl(Uri.parse("https://www.studytutorial.in/android-facebook-integration-and-login-tutorial"))
+//                                                                            .build();
+//                    shareDialog.show(linkContent);  // Show facebook ShareDialog
+//                }
             }
         });
 

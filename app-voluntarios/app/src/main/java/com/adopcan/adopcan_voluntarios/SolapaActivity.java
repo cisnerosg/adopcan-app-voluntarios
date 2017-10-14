@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
+import com.facebook.login.LoginManager;
 
 public class SolapaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -102,6 +103,11 @@ public class SolapaActivity extends AppCompatActivity
             Intent intent = new Intent(this, TabsDogsActivity.class);
             startActivity(intent);
 
+        } else if (id == R.id.nav_close_session){
+            this.finish();
+            LoginManager.getInstance().logOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
