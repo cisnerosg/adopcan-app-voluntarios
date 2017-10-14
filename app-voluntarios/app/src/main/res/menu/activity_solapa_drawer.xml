@@ -12,6 +12,10 @@
             android:icon="@drawable/pichicho"
             android:title="Mis Perros" />
         <item
+            android:id="@+id/nav_dogs2"
+            android:icon="@drawable/pichicho"
+            android:title="Perros Refugiados" />
+        <item
             android:id="@+id/nav_report"
             android:icon="@drawable/reporttrans"
             android:title="Reportar Perro Perdido" />
@@ -19,6 +23,14 @@
             android:id="@+id/nav_map"
             android:icon="@drawable/locationtrans"
             android:title="Ver Mapa Perros Perdidos" />
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/perfil"
+            android:title="Mi Perfil" />
+        <item
+            android:id="@+id/nav_close_session"
+            android:icon="@drawable/close"
+            android:title="Cerrar Sesión" />
     </group>
 
 </menu>

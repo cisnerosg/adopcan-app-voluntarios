@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.adopcan.adopcan_voluntarios.SolapaActivity"
-    android:background="@drawable/main"
+    android:background="@drawable/main2"
     tools:showIn="@layout/app_bar_solapa">
 
 

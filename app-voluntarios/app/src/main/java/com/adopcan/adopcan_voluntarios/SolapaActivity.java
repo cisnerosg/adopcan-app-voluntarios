@@ -72,10 +72,6 @@ public class SolapaActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -99,10 +95,15 @@ public class SolapaActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_map) {
-            Intent intent = new Intent(this, LostDogMapsActivity.class);
+            Intent intent = new Intent(this, ReportMapsActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_dogs2) {
+            Intent intent = new Intent(this, TabsDogsActivity.class);
             startActivity(intent);
 
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
