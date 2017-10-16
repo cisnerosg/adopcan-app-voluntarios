@@ -4,6 +4,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/perfil"
+            android:title="Mi Perfil" />
+        <item
             android:id="@+id/nav_calendar"
             android:icon="@drawable/calendartrans"
             android:title="Mis Tareas" />
@@ -23,10 +27,6 @@
             android:id="@+id/nav_map"
             android:icon="@drawable/locationtrans"
             android:title="Ver Mapa Perros Perdidos" />
-        <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/perfil"
-            android:title="Mi Perfil" />
         <item
             android:id="@+id/nav_close_session"
             android:icon="@drawable/close"
