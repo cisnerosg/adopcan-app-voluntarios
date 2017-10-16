@@ -136,6 +136,16 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
                     startActivity(intent);                }
             });
 
+            final ImageView image_fav = (ImageView)view.findViewById(R.id.imageView_fav);
+            image_fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    image_fav.setImageResource(R.drawable.starton);
+                }
+
+            });
+
             return view;
         }
     }

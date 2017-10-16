@@ -83,15 +83,18 @@
         <activity
             android:name=".DogDetailActivity"
             android:label="Ficha" />
-
         <activity
             android:name=".SolapaActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TabsDogsActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="Perros Refugiados" />
 
-        <activity android:name=".TabsDogsActivity"
-            android:label="Perros Refugiados"/>
-
+        <activity android:name=".MyAccountActivity"
+            android:label="Mi Perfil" />
     </application>
 
 </manifest>

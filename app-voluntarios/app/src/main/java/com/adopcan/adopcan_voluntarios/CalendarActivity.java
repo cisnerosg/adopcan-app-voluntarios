@@ -15,6 +15,7 @@ import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.DTO.CalendarInfo;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.Service.CalendarInfoService;
+import com.adopcan.adopcan_voluntarios.Utils.Circle;
 import com.adopcan.adopcan_voluntarios.Utils.DateUtils;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -97,7 +98,7 @@ public class CalendarActivity extends AppCompatActivity implements  Response.Err
             TextView textPlace = (TextView)view.findViewById(R.id.textView_place);
             TextView textDescription = (TextView)view.findViewById(R.id.textView_description);
 
-            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + listCalendar.get(i).getDog().getFilename()).into(imageView);
+            Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + listCalendar.get(i).getDog().getFilename()).transform(new Circle()).into(imageView);
             textDate.setText(listCalendar.get(i).getDate());
             textName.setText(listCalendar.get(i).getDog().getName());
             textPlace.setText(listCalendar.get(i).getPlace());

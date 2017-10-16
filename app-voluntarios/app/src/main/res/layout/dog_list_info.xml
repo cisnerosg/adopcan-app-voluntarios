@@ -23,7 +23,6 @@
         android:padding="5dp"
         android:textSize="20dp"
         android:layout_alignTop="@+id/imageView"
-        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/imageView" />
 
     <TextView
@@ -59,6 +58,15 @@
         android:text="Ver mas..."
         android:textColor="@color/colorHintsWhite"
         android:textSize="8dp" />
+
+    <ImageView
+        android:id="@+id/imageView_fav"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView_raza"
+        android:layout_alignEnd="@+id/button_more"
+        android:layout_alignTop="@+id/textView_name"
+        app:srcCompat="@drawable/startoff" />
 
 
 </RelativeLayout>

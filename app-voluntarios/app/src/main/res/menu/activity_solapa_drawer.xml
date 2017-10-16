@@ -8,10 +8,6 @@
             android:icon="@drawable/calendartrans"
             android:title="Mis Tareas" />
         <item
-            android:id="@+id/nav_dogs"
-            android:icon="@drawable/pichicho"
-            android:title="Mis Perros" />
-        <item
             android:id="@+id/nav_dogs2"
             android:icon="@drawable/pichicho"
             android:title="Perros Refugiados" />
@@ -22,7 +18,7 @@
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/locationtrans"
-            android:title="Ver Mapa Perros Perdidos" />
+            android:title="Mapa Perros Perdidos" />
         <item
             android:id="@+id/nav_account"
             android:icon="@drawable/perfil"

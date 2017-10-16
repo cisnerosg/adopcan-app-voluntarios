@@ -37,6 +37,7 @@ import java.util.Date;
 import java.util.List;
 
 import static android.support.constraint.R.id.parent;
+import static com.adopcan.adopcan_voluntarios.R.drawable.starton;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
@@ -119,6 +120,15 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
                     startActivity(intent);                }
             });
 
+            final ImageView image_fav = (ImageView)view.findViewById(R.id.imageView_fav);
+            image_fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    image_fav.setImageResource(R.drawable.starton);
+                }
+
+            });
             return view;
         }
     }
@@ -161,5 +171,7 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
         Type typeOfList = new TypeToken<List<DogTemp>>(){}.getType();
         return gson.fromJson(json, typeOfList);
     }
+
+
 
 }

@@ -247,7 +247,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
 
         /*Mi ubicacion*/
         Ubication myUbication = myUbication();
-        Double corrimiento = 0.00000001;
+        Double corrimiento = 0.0000001;
 
         LatLng coor = new LatLng(myUbication.getLatitud() + corrimiento , myUbication.getLongitud());
         CameraUpdate ubication = CameraUpdateFactory.newLatLngZoom(coor,17);

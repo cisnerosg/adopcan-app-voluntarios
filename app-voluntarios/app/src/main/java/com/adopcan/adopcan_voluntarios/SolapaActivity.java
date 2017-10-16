@@ -1,6 +1,7 @@
 package com.adopcan.adopcan_voluntarios;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -86,26 +87,34 @@ public class SolapaActivity extends AppCompatActivity
             Intent intent = new Intent(this, CalendarActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_dogs) {
-            Intent intent = new Intent(this, DogsActivity.class);
-            startActivity(intent);
-
         } else if (id == R.id.nav_report) {
             Intent intent = new Intent(this, ReportLostDogActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_map) {
-            Intent intent = new Intent(this, ReportMapsActivity.class);
+            Intent intent = new Intent(this, LostDogMapsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_dogs2) {
             Intent intent = new Intent(this, TabsDogsActivity.class);
             startActivity(intent);
 
-        }
+        }else if (id == R.id.nav_account) {
+        Intent intent = new Intent(this, MyAccountActivity.class);
+        startActivity(intent);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    }
+
+
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void redirectAdopcan(){
+        Intent viewIntent =
+                new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://www.google.com/"));
+        startActivity(viewIntent);
     }
 }

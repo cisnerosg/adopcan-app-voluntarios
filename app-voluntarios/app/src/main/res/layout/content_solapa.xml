@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.adopcan.adopcan_voluntarios.SolapaActivity"
-    android:background="@drawable/main2"
+    android:background="@drawable/main3"
     tools:showIn="@layout/app_bar_solapa">
 
 
@@ -20,13 +20,15 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Juntos podemos ayudar a los perritos que más lo necesitan!"
+        android:text="Juntamos lograremos que mas perros encuentren un hogar"
         android:textSize="20dp"
         android:textStyle="bold"
         android:gravity="center"
@@ -38,5 +40,86 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="24dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.458" />
+        app:layout_constraintHorizontal_bias="0.458"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:text="Buscanos en las redes"
+        android:textColor="@color/colorHintsWhite"
+        android:textSize="15dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="261dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="443dp"
+        app:layout_constraintHorizontal_bias="0.506">
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="23dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+
+            android:text="/adopcan"
+            android:textColor="@color/colorHintsWhite"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/imageView17"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:text="#adopcan"
+            android:textColor="@color/colorHintsWhite"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/imageView16"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+            android:layout_marginBottom="24dp" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/logofacebook"
+            tools:layout_editor_absoluteY="13dp"
+            app:layout_constraintLeft_toRightOf="@+id/textView23"
+            android:layout_marginLeft="8dp" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:srcCompat="@drawable/logoinstagram"
+            tools:layout_editor_absoluteY="14dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
