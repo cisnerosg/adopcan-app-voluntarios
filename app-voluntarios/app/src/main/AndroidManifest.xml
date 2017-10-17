@@ -53,6 +53,9 @@
             android:name=".ListDogActivity"
             android:label="Mis Perros" />
         <activity
+            android:name=".OrganizationActivity"
+            android:label="Mis Organizaciones" />
+        <activity
             android:name=".LostDogMapsActivity"
             android:configChanges="screenSize|orientation"
             android:label="Ubicaciones" />
