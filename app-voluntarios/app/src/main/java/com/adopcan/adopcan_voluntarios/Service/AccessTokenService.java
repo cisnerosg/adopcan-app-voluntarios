@@ -44,4 +44,21 @@ public class AccessTokenService {
 
     }
 
+    public StringRequest getAccessTokenFB(String token, Response.Listener<String> responseListener, Response.ErrorListener errorListener){
+
+
+        final Map<String, String> params = new LinkedHashMap<>();
+        params.put("client_id", "android");
+        params.put("client_secret", "$2y$10$i7jFI84uPuuzqbAT.tJyb.h1xggXRVK3Onj8XpLGhdOzfKhhcReiC");
+        params.put("scope", "default");
+        params.put("grant_type", "facebook");
+        params.put("fb_access_token", token);
+
+        String url = "http://www.adopcan.com/api/access_token";
+
+        HttpMethod httpMethod = new HttpMethod();
+        return httpMethod.httpPostMethod(url, params, responseListener,errorListener);
+
+    }
+
 }

@@ -77,9 +77,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <!-- <provider android:authorities="com.facebook.app.FacebookContentProvider{1530763970321728}" -->
-        <!-- android:name="com.facebook.FacebookContentProvider" -->
-        <!-- android:exported="true"/> -->
         <activity
             android:name=".DogDetailActivity"
             android:label="Ficha" />
@@ -97,4 +94,7 @@
             android:label="Mi Perfil" />
     </application>
 
+    <provider android:authorities="com.facebook.app.FacebookContentProvider1530763970321728"
+    android:name="com.facebook.FacebookContentProvider"
+    android:exported="true"/>
 </manifest>

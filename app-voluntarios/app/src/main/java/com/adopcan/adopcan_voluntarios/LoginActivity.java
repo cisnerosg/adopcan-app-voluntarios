@@ -25,6 +25,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
@@ -33,6 +34,8 @@ import com.facebook.FacebookSdk;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements Response.ErrorListener, Response.Listener<String> {
 
@@ -42,7 +45,8 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-
+    private LoginManager loginManager;
+    private List<String> permissionNeeds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +55,17 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
         getSupportActionBar().hide();
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+
         setContentView(R.layout.activity_login);
         info = (TextView)findViewById(R.id.info);
         if(Profile.getCurrentProfile() != null && AccessToken.getCurrentAccessToken() != null){
             //Está logueado en Facebook, asique va directo al menú
-            startActivity(new Intent(LoginActivity.this, UserMenuActivity.class));
+            startActivity(new Intent(LoginActivity.this, SolapaActivity.class));
         } else {
             loginButton = (LoginButton)findViewById(R.id.login_button);
+            loginButton.setReadPermissions(Arrays.asList("email","user_status","publish_actions"));
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     //                info.setText(
@@ -68,7 +75,44 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
                     //                                "Auth Token: "
                     //                                + loginResult.getAccessToken().getToken()
                     //                );
-                    startActivity(new Intent(LoginActivity.this, UserMenuActivity.class));
+
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            GsonBuilder builder = new GsonBuilder();
+                            builder.setExclusionStrategies(new DefaultExclusionStrategy());
+                            Gson json = builder.create();
+                            ResponseToken responseToken = json.fromJson(response,ResponseToken.class);
+                            user.addResponseToken(responseToken);
+                            SecurityHandler.getInstance(user);
+                            Intent intent = new Intent(LoginActivity.this, SolapaActivity.class);
+                            startActivity(intent);
+                        }
+                    };
+                    Response.ErrorListener errorListener = new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            if (error == null || error.networkResponse == null) {
+                                return;
+                            }
+
+                            String body;
+                            //get status code here
+                            final String statusCode = String.valueOf(error.networkResponse.statusCode);
+                            //get response body and parse with appropriate encoding
+                            try {
+                                body = new String(error.networkResponse.data,"UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                // exception
+                            }
+                            alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "El usuario o la contraseña no son válidos");
+                        }
+                    };
+
+                    AccessTokenService accessTokenService = new AccessTokenService();
+                    Request<?> request = accessTokenService.getAccessTokenFB(loginResult.getAccessToken().getToken(), responseListener, errorListener);
+                    AppController.getInstance().addToRequestQueue(request);
 
                 }
 

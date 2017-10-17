@@ -1,5 +1,6 @@
 package com.adopcan.adopcan_voluntarios;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,9 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
+import com.facebook.login.LoginManager;
+
+import retrofit2.http.HEAD;
+
 
 public class SolapaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +40,6 @@ public class SolapaActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -102,6 +107,12 @@ public class SolapaActivity extends AppCompatActivity
         }else if (id == R.id.nav_account) {
         Intent intent = new Intent(this, MyAccountActivity.class);
         startActivity(intent);
+        } else if (id == R.id.nav_close_session){
+            this.finish();
+            LoginManager.getInstance().logOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
 
     }
 

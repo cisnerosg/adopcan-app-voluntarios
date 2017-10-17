@@ -134,12 +134,12 @@ public class ReportMapsActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     public void reportLostDogDetails(View view){
-        if(lat == 0.0 || lon == 0.0){
-            alertDialog.showAlertWithAcept(this, "Alerta", "Tenés que tener marcada una ubicación para continuar");
-        }else {
+//        if(lat == 0.0 || lon == 0.0){
+//            alertDialog.showAlertWithAcept(this, "Alerta", "Tenés que tener marcada una ubicación para continuar");
+//        }else {
             Intent intent = new Intent(this, ReportLostDogDetailsActivity.class);
             intent.putExtra ("report", getReportWithUbication());
             startActivity(intent);
-        }
+//        }
     }
 }
