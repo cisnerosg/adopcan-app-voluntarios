@@ -125,8 +125,12 @@ public class OrganizationActivity extends AppCompatActivity implements  Response
             view = getLayoutInflater().inflate(R.layout.organization_list_info, null);
 
             ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
-            TextView textName = (TextView)view.findViewById(R.id.org_name);
-            textName.setText(organizaciones.get(i).getName());
+            TextView orgName = (TextView)view.findViewById(R.id.org_name);
+            TextView orgDir = (TextView)view.findViewById(R.id.org_dir);
+            TextView orgWeb = (TextView)view.findViewById(R.id.org_webSite);
+            orgName.setText(organizaciones.get(i).getName());
+            orgDir.setText(organizaciones.get(i).getAddress());
+            orgWeb.setText(organizaciones.get(i).getWeb());
 
             Button button = (Button)view.findViewById(R.id.seleccionar_organizacion);
             button.setOnClickListener(new View.OnClickListener() {
