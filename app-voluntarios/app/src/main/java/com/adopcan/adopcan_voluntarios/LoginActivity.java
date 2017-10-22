@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
+import com.adopcan.adopcan_voluntarios.DTO.OrganizationTemp;
 import com.adopcan.adopcan_voluntarios.DTO.User;
 import com.adopcan.adopcan_voluntarios.DTO.UserType;
 import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.adopcan.adopcan_voluntarios.Service.AccessTokenService;
+import com.adopcan.adopcan_voluntarios.Service.OrganizationService;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,9 +33,11 @@ import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.facebook.FacebookSdk;
+import com.google.gson.reflect.TypeToken;
 
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     private List<String> permissionNeeds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +149,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
             AccessTokenService accessTokenService = new AccessTokenService();
             Request<?> request = accessTokenService.getAccessToken(user.getUsername(), user.getPassword(),this, this);
             AppController.getInstance().addToRequestQueue(request);
+
         }
     }
 
@@ -156,8 +162,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
         ResponseToken responseToken = json.fromJson(response,ResponseToken.class);
         user.addResponseToken(responseToken);
         SecurityHandler.getInstance(user);
-
-        Intent intent = new Intent(this, SolapaActivity.class);
+        Intent intent = new Intent(this, OrganizationActivity.class);
         startActivity(intent);
     }
     @Override

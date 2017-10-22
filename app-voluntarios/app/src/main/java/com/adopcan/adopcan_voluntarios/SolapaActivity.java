@@ -18,10 +18,13 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
+import com.adopcan.adopcan_voluntarios.DTO.OrganizationTemp;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
 import com.facebook.login.LoginManager;
 
 import retrofit2.http.HEAD;
+
+import static android.R.id.message;
 
 
 public class SolapaActivity extends AppCompatActivity
@@ -34,7 +37,12 @@ public class SolapaActivity extends AppCompatActivity
         setContentView(R.layout.activity_solapa);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        if(getIntent().getExtras() != null) {
+            if(getIntent().getExtras().get("organizacion") != null) {
+                String nombre = ((OrganizationTemp) getIntent().getExtras().get("organizacion")).getName();
+                setTitle(nombre);
+            }
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -90,6 +98,10 @@ public class SolapaActivity extends AppCompatActivity
 
         if (id == R.id.nav_calendar) {
             Intent intent = new Intent(this, CalendarActivity.class);
+            startActivity(intent);
+
+        }  else if (id == R.id.nav_organization) {
+            Intent intent = new Intent(this, OrganizationActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_report) {

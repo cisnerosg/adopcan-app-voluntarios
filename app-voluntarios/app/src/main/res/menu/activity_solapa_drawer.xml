@@ -8,6 +8,10 @@
             android:icon="@drawable/perfil"
             android:title="Mi Perfil" />
         <item
+            android:id="@+id/nav_organization"
+            android:icon="@drawable/organizacion"
+            android:title="Mis Organizaciones" />
+        <item
             android:id="@+id/nav_calendar"
             android:icon="@drawable/calendartrans"
             android:title="Mis Tareas" />
