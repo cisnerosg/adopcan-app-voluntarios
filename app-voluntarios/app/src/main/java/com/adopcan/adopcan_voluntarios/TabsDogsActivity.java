@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
+import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.adopcan.adopcan_voluntarios.Service.DogService;
 import com.adopcan.adopcan_voluntarios.Utils.Circle;
 import com.adopcan.adopcan_voluntarios.Utils.DateUtils;
@@ -69,13 +70,19 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
             @Override
             public void onTabChanged(String tabId) {
                 selectedTab = tabId;
-                initListDog();
+
+                boolean favorite = false;
+                if(selectedTab == TAB2){
+                    favorite = true;
+                }
+
+                initListDog(favorite);
             }
         });
 
         tabs.setCurrentTab(0);
         dateUtils = new DateUtils();
-        initListDog();
+        initListDog(false);
     }
 
     @Override
@@ -91,12 +98,17 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
     }
 
     /*busca los perros y los agrega en el listview*/
-    private void initListDog(){
+    private void initListDog(boolean favorites){
         dogService = new DogService();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Request<?> request = dogService.getDogs(this, this);
-        AppController.getInstance().addToRequestQueue(request);
 
+        if(SecurityHandler.getSecurity().getUser()!= null) {
+            Request<?> request = dogService.getDogs(favorites,this, this);
+            AppController.getInstance().addToRequestQueue(request);
+        }else{
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -136,12 +148,22 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
                     startActivity(intent);                }
             });
 
-            final ImageView image_fav = (ImageView)view.findViewById(R.id.imageView_fav);
-            image_fav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            final ImageView image_fav = (ImageView) view.findViewById(R.id.imageView_fav);
 
+            if(dogs.get(i).isFavorite()) {
+                image_fav.setImageResource(R.drawable.starton);
+            }else{
+                image_fav.setImageResource(R.drawable.startoff);
+            }
+
+            image_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dogs.get(i).isFavorite()) {
+                    image_fav.setImageResource(R.drawable.startoff);
+                }else{
                     image_fav.setImageResource(R.drawable.starton);
+                }
                 }
 
             });

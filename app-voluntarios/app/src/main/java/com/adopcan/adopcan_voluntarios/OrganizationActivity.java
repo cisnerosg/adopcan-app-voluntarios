@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,7 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
+import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
+import com.adopcan.adopcan_voluntarios.DTO.Account;
 import com.adopcan.adopcan_voluntarios.DTO.OrganizationTemp;
+import com.adopcan.adopcan_voluntarios.Security.ResponseToken;
+import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
+import com.adopcan.adopcan_voluntarios.Service.AccountService;
 import com.adopcan.adopcan_voluntarios.Service.OrganizationService;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -45,6 +52,53 @@ public class OrganizationActivity extends AppCompatActivity implements  Response
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                Log.i("ActionBar", "Atrás!");
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void fillUser(OrganizationTemp org){
+
+        SecurityHandler.getSecurity().getUser().setOrganization(org);
+
+        AccountService accountService = new AccountService();
+        Request<?> request = accountService.fillAccount(new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                GsonBuilder builder = new GsonBuilder();
+                Gson json = builder.create();
+                Account account = json.fromJson(response,Account.class);
+
+                SecurityHandler.getSecurity().getUser().setAccount(account);
+
+                Intent intent = new Intent(getApplicationContext(), SolapaActivity.class);
+                startActivity(intent);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String err = "ocurrio un error";
+
+                Intent intent = new Intent(getApplicationContext(), SolapaActivity.class);
+                startActivity(intent);
+            }
+        });
+        AppController.getInstance().addToRequestQueue(request);
+
+
+
+
+    }
+
+    @Override
     public void onResponse(String response) {
 
         try {
@@ -54,10 +108,9 @@ public class OrganizationActivity extends AppCompatActivity implements  Response
                 OrganizationActivity.CustomAdapter customAdapter = new OrganizationActivity.CustomAdapter();
                 listView.setAdapter(customAdapter);
             } else {
-                Intent intent = new Intent(this, SolapaActivity.class);
-                intent.putExtra ("organizacion", organizaciones.get(0));
-                startActivity(intent);
+                fillUser(organizaciones.get(0));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,15 +189,14 @@ public class OrganizationActivity extends AppCompatActivity implements  Response
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    Intent intent = new Intent(view.getContext(), SolapaActivity.class);
-                    intent.putExtra ("organizacion", organizaciones.get(i));
-                    startActivity(intent);
+                fillUser(organizaciones.get(i));
                 }
             });
             return view;
         }
     }
+
+
 
 
 }

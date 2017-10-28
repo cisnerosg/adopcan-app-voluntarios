@@ -96,7 +96,7 @@ public class ListDogActivity extends AppCompatActivity implements Response.Error
         ////////////////////////////////////////////////////////////////
 
         DogService dogService = new DogService();
-        Request<?> request = dogService.getDogs(this, this);
+        Request<?> request = dogService.getDogs(false,this, this);
         AppController.getInstance().addToRequestQueue(request);
 
         /////////////////////////////////////////////////////////////////

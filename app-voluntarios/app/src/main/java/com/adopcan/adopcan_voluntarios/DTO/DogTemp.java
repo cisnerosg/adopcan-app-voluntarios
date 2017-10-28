@@ -37,7 +37,8 @@ public class DogTemp implements Serializable {
     private String notes;
     @SerializedName("foto")
     private String filename;
-
+    @SerializedName("favorito")
+    private int favorite;
     private Bitmap photo;
 
     public DogTemp(String id, String name) {
@@ -139,5 +140,17 @@ public class DogTemp implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
+
+    public boolean isFavorite(){
+        return favorite == 1;
     }
 }

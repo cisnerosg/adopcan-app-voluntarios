@@ -12,13 +12,13 @@ public class User {
 
     private String username;
     private String password;
-    private UserType type;
     private ResponseToken responseToken;
+    private OrganizationTemp organization;
+    private Account account;
 
-    public User(String username, String password, UserType type) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.type = type;
 
     }
 
@@ -42,15 +42,23 @@ public class User {
         this.password = password;
     }
 
-    public UserType getType() {
-        return type;
-    }
-
-    public void setType(UserType type) {
-        this.type = type;
-    }
-
     public ResponseToken getResponseToken() {
         return responseToken;
+    }
+
+    public OrganizationTemp getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(OrganizationTemp organization) {
+        this.organization = organization;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

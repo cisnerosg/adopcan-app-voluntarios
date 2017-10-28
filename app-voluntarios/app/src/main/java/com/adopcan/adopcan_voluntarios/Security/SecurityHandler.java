@@ -31,6 +31,10 @@ public class SecurityHandler {
         return user;
     }
 
+    public void cleanSesion(){
+        security = null;
+    }
+
     public static SecurityHandler getSecurity() {
         return security;
     }

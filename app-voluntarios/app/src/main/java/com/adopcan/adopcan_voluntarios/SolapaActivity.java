@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.DTO.MessageAlert;
 import com.adopcan.adopcan_voluntarios.DTO.OrganizationTemp;
+import com.adopcan.adopcan_voluntarios.DTO.User;
+import com.adopcan.adopcan_voluntarios.DTO.UserType;
+import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
 import com.facebook.login.LoginManager;
 
@@ -37,12 +40,7 @@ public class SolapaActivity extends AppCompatActivity
         setContentView(R.layout.activity_solapa);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getIntent().getExtras() != null) {
-            if(getIntent().getExtras().get("organizacion") != null) {
-                String nombre = ((OrganizationTemp) getIntent().getExtras().get("organizacion")).getName();
-                setTitle(nombre);
-            }
-        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -50,6 +48,22 @@ public class SolapaActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        customMenu();
+    }
+
+    private void customMenu()
+    {
+        boolean isVoluntary = SecurityHandler.getSecurity().getUser().getAccount().getUserType().equals(UserType.VOLUNTARY);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+
+        if(!isVoluntary) {
+            nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
+            nav_Menu.findItem(R.id.nav_organization).setVisible(false);
+            nav_Menu.findItem(R.id.nav_dogs2).setVisible(false);
+            nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
+        }
     }
 
     /*Si redirecciona muestro un msj*/
@@ -96,32 +110,40 @@ public class SolapaActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_calendar) {
-            Intent intent = new Intent(this, CalendarActivity.class);
-            startActivity(intent);
+        if(SecurityHandler.getSecurity().getUser()!= null) {
 
-        }  else if (id == R.id.nav_organization) {
-            Intent intent = new Intent(this, OrganizationActivity.class);
-            startActivity(intent);
+            if (id == R.id.nav_calendar) {
+                Intent intent = new Intent(this, CalendarActivity.class);
+                startActivity(intent);
 
-        } else if (id == R.id.nav_report) {
-            Intent intent = new Intent(this, ReportLostDogActivity.class);
-            startActivity(intent);
+            } else if (id == R.id.nav_organization) {
+                Intent intent = new Intent(this, OrganizationActivity.class);
+                startActivity(intent);
 
-        } else if (id == R.id.nav_map) {
-            Intent intent = new Intent(this, LostDogMapsActivity.class);
-            startActivity(intent);
+            } else if (id == R.id.nav_dogs2) {
+                Intent intent = new Intent(this, TabsDogsActivity.class);
+                startActivity(intent);
 
-        } else if (id == R.id.nav_dogs2) {
-            Intent intent = new Intent(this, TabsDogsActivity.class);
-            startActivity(intent);
+            } else if (id == R.id.nav_report) {
+                Intent intent = new Intent(this, ReportLostDogActivity.class);
+                startActivity(intent);
 
-        }else if (id == R.id.nav_account) {
-        Intent intent = new Intent(this, MyAccountActivity.class);
-        startActivity(intent);
-        } else if (id == R.id.nav_close_session){
-            this.finish();
-            LoginManager.getInstance().logOut();
+            } else if (id == R.id.nav_map) {
+                Intent intent = new Intent(this, LostDogMapsActivity.class);
+                startActivity(intent);
+
+
+            } else if (id == R.id.nav_account) {
+                Intent intent = new Intent(this, MyAccountActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_close_session) {
+                this.finish();
+                LoginManager.getInstance().logOut();
+                SecurityHandler.getSecurity().cleanSesion();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        }else{
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }

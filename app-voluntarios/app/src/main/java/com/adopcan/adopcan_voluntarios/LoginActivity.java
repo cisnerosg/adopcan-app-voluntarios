@@ -144,7 +144,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
             alertDialog.showAlertWithAcept(this, "Alerta", "Completá el usuario y la contraseña para ingresar");
         }else{
 
-            user = new User(username.getText().toString(), pass.getText().toString(), UserType.SIMPLE);
+            user = new User(username.getText().toString(), pass.getText().toString());
 
             AccessTokenService accessTokenService = new AccessTokenService();
             Request<?> request = accessTokenService.getAccessToken(user.getUsername(), user.getPassword(),this, this);
