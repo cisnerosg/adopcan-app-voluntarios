@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
             startActivity(new Intent(LoginActivity.this, SolapaActivity.class));
         } else {
             loginButton = (LoginButton)findViewById(R.id.login_button);
-            loginButton.setReadPermissions(Arrays.asList("email","user_status","publish_actions"));
+            loginButton.setReadPermissions(Arrays.asList("email","user_status"));
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
                 @Override
