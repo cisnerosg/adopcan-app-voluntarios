@@ -65,6 +65,8 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
         info = (TextView)findViewById(R.id.info);
         if(Profile.getCurrentProfile() != null && AccessToken.getCurrentAccessToken() != null){
             //Está logueado en Facebook, asique va directo al menú
+            user = new User();
+            SecurityHandler.getInstance(user);
             startActivity(new Intent(LoginActivity.this, SolapaActivity.class));
         } else {
             loginButton = (LoginButton)findViewById(R.id.login_button);
@@ -114,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
                             alertDialog.showAlertWithAcept(LoginActivity.this, "Alerta", "El usuario o la contraseña no son válidos");
                         }
                     };
-
+                    user = new User();
                     AccessTokenService accessTokenService = new AccessTokenService();
                     Request<?> request = accessTokenService.getAccessTokenFB(loginResult.getAccessToken().getToken(), responseListener, errorListener);
                     AppController.getInstance().addToRequestQueue(request);

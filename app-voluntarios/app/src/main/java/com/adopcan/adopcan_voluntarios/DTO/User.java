@@ -16,6 +16,8 @@ public class User {
     private OrganizationTemp organization;
     private Account account;
 
+    public User(){}
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;

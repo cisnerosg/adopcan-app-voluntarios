@@ -23,6 +23,8 @@ import com.adopcan.adopcan_voluntarios.DTO.User;
 import com.adopcan.adopcan_voluntarios.DTO.UserType;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
 import com.adopcan.adopcan_voluntarios.Utils.AlertDialog;
+import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
 import retrofit2.http.HEAD;
@@ -53,17 +55,20 @@ public class SolapaActivity extends AppCompatActivity
 
     private void customMenu()
     {
-        boolean isVoluntary = SecurityHandler.getSecurity().getUser().getAccount().getUserType().equals(UserType.VOLUNTARY);
+        boolean isVoluntary = false;
+        if(SecurityHandler.getSecurity() != null && Profile.getCurrentProfile() == null){ //Si tiene security y si no está logueado con facebook
+            isVoluntary = SecurityHandler.getSecurity().getUser().getAccount().getUserType().equals(UserType.VOLUNTARY);
+        }
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
 
-        /*if(!isVoluntary) {
+        if(!isVoluntary) {
             nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
             nav_Menu.findItem(R.id.nav_organization).setVisible(false);
             nav_Menu.findItem(R.id.nav_dogs2).setVisible(false);
             nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
-        }*/
+        }
     }
 
     /*Si redirecciona muestro un msj*/
