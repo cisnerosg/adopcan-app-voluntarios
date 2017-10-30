@@ -58,12 +58,12 @@ public class SolapaActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
 
-        if(!isVoluntary) {
+        /*if(!isVoluntary) {
             nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
             nav_Menu.findItem(R.id.nav_organization).setVisible(false);
             nav_Menu.findItem(R.id.nav_dogs2).setVisible(false);
             nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
-        }
+        }*/
     }
 
     /*Si redirecciona muestro un msj*/

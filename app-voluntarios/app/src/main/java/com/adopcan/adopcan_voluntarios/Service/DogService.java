@@ -47,4 +47,16 @@ public class DogService {
 
     }
 
+
+    public StringRequest changeFavoriteDog(int favorite, String animalId,Response.Listener<String> responseListener, Response.ErrorListener errorListener) {
+        
+        OrganizationTemp org = SecurityHandler.getSecurity().getUser().getOrganization();
+
+        String url = "http://www.adopcan.com/api/"+ org.getId() +"/animales/"+animalId+"/favorito/" + favorite;
+
+        HttpMethod httpMethod = new HttpMethod();
+        return httpMethod.httpGetMethod(url,responseListener, errorListener);
+
+    }
+
 }

@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TabsDogsActivity extends AppCompatActivity  implements  Response.ErrorListener, Response.Listener<String> {
@@ -103,6 +104,9 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if(SecurityHandler.getSecurity().getUser()!= null) {
+
+            TextView filter = (TextView) findViewById(R.id.editText_filter);
+
             Request<?> request = dogService.getDogs(favorites,this, this);
             AppController.getInstance().addToRequestQueue(request);
         }else{
@@ -160,8 +164,18 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
             @Override
             public void onClick(View view) {
                 if(dogs.get(i).isFavorite()) {
+                    changeFavoriteDog(0,dogs.get(i).getId());
                     image_fav.setImageResource(R.drawable.startoff);
+
+                    Toast.makeText(getApplicationContext(), dogs.get(i).getName() +" dejo de estar entre tus favoritos",
+                            Toast.LENGTH_SHORT).show();
+
+
                 }else{
+                    Toast.makeText(getApplicationContext(), dogs.get(i).getName() +" ahora esta entre tus favoritos",
+                            Toast.LENGTH_SHORT).show();
+
+                    changeFavoriteDog(1,dogs.get(i).getId());
                     image_fav.setImageResource(R.drawable.starton);
                 }
                 }
@@ -170,6 +184,27 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
 
             return view;
         }
+    }
+
+    private void changeFavoriteDog(int favorite, String id){
+        Request<?> request =dogService.changeFavoriteDog(favorite, id, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if(selectedTab.equals(TAB1)){
+                    initListDog(false);
+                }else{
+                    initListDog(true);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        AppController.getInstance().addToRequestQueue(request);
     }
 
     @Override
@@ -184,7 +219,6 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
                 listView = (ListView)findViewById(R.id.listView_dogs);
             }else if(selectedTab.equals(TAB2)){
                 listView = (ListView)findViewById(R.id.listView_favorites);
-                dogs.remove(0);
             }
 
             TabsDogsActivity.CustomAdapter customAdapter = new TabsDogsActivity.CustomAdapter();
@@ -194,6 +228,19 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
         }
 
     }
+
+    private void cleanFavoritesDogs(){
+        List<DogTemp> aux = new ArrayList<>();
+
+        for(DogTemp dog : dogs){
+            if(dog.isFavorite()){
+                aux.add(dog);
+            }
+        }
+
+        dogs = aux;
+    }
+
     @Override
     public void onErrorResponse(VolleyError error) {
 
@@ -220,6 +267,16 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
         return gson.fromJson(json, typeOfList);
     }
 
-
+    public void searchWithFilter(View view){
+        if(selectedTab.equals(TAB1)){
+            initListDog(false);
+        }else if(selectedTab.equals(TAB2)) {
+            initListDog(true);
+        }
+    }
+    public void cleanFilter(View view){
+        TextView filter = (TextView) findViewById(R.id.editText_filter);
+        filter.setText("");
+    }
 
 }
