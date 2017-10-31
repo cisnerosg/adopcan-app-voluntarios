@@ -129,55 +129,51 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
 
     private void compartirReporteFacebook() {
         final ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButtonFB);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                    if(Profile.getCurrentProfile() != null && AccessToken.getCurrentAccessToken() != null){
-                        Response.Listener<String> responseListener = new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                GsonBuilder builder = new GsonBuilder();
-                                builder.setExclusionStrategies(new DefaultExclusionStrategy());
-                                Gson json = builder.create();
-                                ResponseToken responseToken = json.fromJson(response,ResponseToken.class);
-//                                user.addResponseToken(responseToken);
-//                                SecurityHandler.getInstance(user);
-//                                Intent intent = new Intent(LoginActivity.this, SolapaActivity.class);
-//                                startActivity(intent);
-                            }
-                        };
-                        Response.ErrorListener errorListener = new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                                if (error == null || error.networkResponse == null) {
-                                    return;
-                                }
-
-                                String body;
-                                //get status code here
-                                final String statusCode = String.valueOf(error.networkResponse.statusCode);
-                                //get response body and parse with appropriate encoding
-                                try {
-                                    body = new String(error.networkResponse.data,"UTF-8");
-                                } catch (UnsupportedEncodingException e) {
-                                    // exception
-                                }
-
-                            }
-                        };
-
-
-                        AccessTokenService accessTokenService = new AccessTokenService();
-                        Request<?> request = accessTokenService.getAccessTokenFB(AccessToken.getCurrentAccessToken().getToken(), responseListener, errorListener);
-                        AppController.getInstance().addToRequestQueue(request);
+        if (toggle.isChecked()) {
+            // The toggle is enabled
+            if(Profile.getCurrentProfile() != null && AccessToken.getCurrentAccessToken() != null){
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        GsonBuilder builder = new GsonBuilder();
+                        builder.setExclusionStrategies(new DefaultExclusionStrategy());
+                        Gson json = builder.create();
+                        ResponseToken responseToken = json.fromJson(response,ResponseToken.class);
+                        SecurityHandler.getSecurity().getUser().addResponseToken(responseToken);
+                        Intent intent = new Intent(ReportLostDogDetailsActivity.this, SolapaActivity.class);
+                        startActivity(intent);
                     }
-                } else {
-                    // The toggle is disabled
-                }
+                };
+                Response.ErrorListener errorListener = new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        if (error == null || error.networkResponse == null) {
+                            return;
+                        }
+
+                        String body;
+                        //get status code here
+                        final String statusCode = String.valueOf(error.networkResponse.statusCode);
+                        //get response body and parse with appropriate encoding
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            // exception
+                        }
+
+                    }
+                };
+
+
+                AccessTokenService accessTokenService = new AccessTokenService();
+                Request<?> request = accessTokenService.getAccessTokenFB(AccessToken.getCurrentAccessToken().getToken(), responseListener, errorListener);
+                AppController.getInstance().addToRequestQueue(request);
             }
-        });
+        } else {
+            // The toggle is disabled
+        }
+
     }
 
     private void login(){
