@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            LoginManager.getInstance().logInWithPublishPermissions(LoginActivity.this, Arrays.asList("publish_actions"));
                             GsonBuilder builder = new GsonBuilder();
                             builder.setExclusionStrategies(new DefaultExclusionStrategy());
                             Gson json = builder.create();

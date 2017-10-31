@@ -167,6 +167,8 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
 
                             }
                         };
+
+
                         AccessTokenService accessTokenService = new AccessTokenService();
                         Request<?> request = accessTokenService.getAccessTokenFB(AccessToken.getCurrentAccessToken().getToken(), responseListener, errorListener);
                         AppController.getInstance().addToRequestQueue(request);
