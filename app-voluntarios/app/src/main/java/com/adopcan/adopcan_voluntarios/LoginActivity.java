@@ -91,8 +91,7 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
                             builder.setExclusionStrategies(new DefaultExclusionStrategy());
                             Gson json = builder.create();
                             ResponseToken responseToken = json.fromJson(response,ResponseToken.class);
-                            user.addResponseToken(responseToken);
-                            SecurityHandler.getInstance(user);
+                            SecurityHandler.getSecurity().getUser().addResponseToken(responseToken);
                             Intent intent = new Intent(LoginActivity.this, SolapaActivity.class);
                             startActivity(intent);
                         }
@@ -118,6 +117,8 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
                         }
                     };
                     user = new User();
+                    user.addFacebookToken(loginResult.getAccessToken().getToken());
+                    SecurityHandler.getInstance(user);
                     AccessTokenService accessTokenService = new AccessTokenService();
                     Request<?> request = accessTokenService.getAccessTokenFB(loginResult.getAccessToken().getToken(), responseListener, errorListener);
                     AppController.getInstance().addToRequestQueue(request);

@@ -41,6 +41,8 @@ public class Report implements Serializable{
 
     private byte[] photoByte;
 
+    private boolean shareFacebook;
+
     public String getId() {
         return id;
     }
@@ -123,5 +125,13 @@ public class Report implements Serializable{
 
     public void setPhotoByte(byte[] photoByte) {
         this.photoByte = photoByte;
+    }
+
+    public boolean isShareFacebook() {
+        return shareFacebook;
+    }
+
+    public void setShareFacebook(boolean shareFacebook) {
+        this.shareFacebook = shareFacebook;
     }
 }

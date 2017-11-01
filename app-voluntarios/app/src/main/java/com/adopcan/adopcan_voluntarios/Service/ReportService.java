@@ -70,6 +70,7 @@ public class ReportService {
     private VolleyMultipartRequest sendReport(final Report report, String url, final boolean withImage) {
         // loading or check internet connection or something...
         // ... then
+        report.setShareFacebook(true);
 
         VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
             @Override
@@ -100,6 +101,9 @@ public class ReportService {
                 params.put("coords", getCoords(report));
                 params.put("descripcion", report.getDescription());
                 params.put("estado", Integer.toString(report.getState()));
+                if(report.isShareFacebook()) {
+                    params.put("fb_access_token", SecurityHandler.getSecurity().getUser().getFacebookToken());
+                }
                 return params;
             }
 

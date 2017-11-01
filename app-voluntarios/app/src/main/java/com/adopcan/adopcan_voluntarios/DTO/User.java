@@ -13,6 +13,7 @@ public class User {
     private String username;
     private String password;
     private ResponseToken responseToken;
+    private String facebookToken;
     private OrganizationTemp organization;
     private Account account;
 
@@ -26,6 +27,10 @@ public class User {
 
     public void addResponseToken(ResponseToken responseToken){
         this.responseToken = responseToken;
+    }
+
+    public void addFacebookToken(String token){
+        this.facebookToken = token;
     }
 
     public String getUsername() {
@@ -62,5 +67,13 @@ public class User {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public String getFacebookToken() {
+        return facebookToken;
+    }
+
+    public void setFacebookToken(String facebookToken) {
+        this.facebookToken = facebookToken;
     }
 }
