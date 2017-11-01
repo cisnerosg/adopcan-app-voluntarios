@@ -29,6 +29,7 @@ import com.adopcan.adopcan_voluntarios.Volley.AppHelper;
 import com.adopcan.adopcan_voluntarios.Volley.VolleyMultipartRequest;
 import com.adopcan.adopcan_voluntarios.Volley.VolleySingleton;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -79,7 +80,7 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
         TextView toggleButtonView = (TextView) findViewById(R.id.toggleButtonFB);
         TextView textViewCompartir = (TextView) findViewById(R.id.compartirText);
         TextView textViewFacebook = (TextView) findViewById(R.id.facebookText);
-        if(Profile.getCurrentProfile() != null){
+        /*if(Profile.getCurrentProfile() != null){
             toggleButtonView.setVisibility(View.VISIBLE);
             textViewCompartir.setVisibility(View.VISIBLE);
             textViewFacebook.setVisibility(View.VISIBLE);
@@ -88,7 +89,7 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
             textViewCompartir.setVisibility(View.INVISIBLE);
             textViewFacebook.setVisibility(View.INVISIBLE);
         }
-
+        */
 
     }
 
@@ -121,8 +122,10 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
             report.setState(State.ACTIVE.getId());
             ReportService reportService = new ReportService();
             VolleyMultipartRequest multipartRequest = reportService.saveReport(report);
+            DefaultRetryPolicy  retryPolicy = new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            multipartRequest.setRetryPolicy(retryPolicy);
             VolleySingleton.getInstance(getBaseContext()).addToRequestQueue(multipartRequest);
-            compartirReporteFacebook();
+         //   compartirReporteFacebook();
             login();
         }
     }
