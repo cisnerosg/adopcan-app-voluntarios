@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.DTO.Account;
 import com.adopcan.adopcan_voluntarios.Security.SecurityHandler;
+import com.facebook.Profile;
+
+import static android.R.attr.name;
 
 public class MyAccountActivity extends AppCompatActivity {
 
@@ -34,16 +37,19 @@ public class MyAccountActivity extends AppCompatActivity {
 
     private void fillAccount(){
 
-        Account account = SecurityHandler.getSecurity().getUser().getAccount();
-
         TextView name = (TextView) findViewById(R.id.textView_name);
-        name.setText(account.getName());
-
         TextView lastname = (TextView) findViewById(R.id.textView_lastname);
-        lastname.setText(account.getLastname());
-
         TextView email = (TextView) findViewById(R.id.textView_email);
-        email.setText(account.getEmail());
+        if(Profile.getCurrentProfile() != null) {
+            name.setText(Profile.getCurrentProfile().getFirstName());
+            lastname.setText(Profile.getCurrentProfile().getLastName());
+        } else {
+            Account account = SecurityHandler.getSecurity().getUser().getAccount();
+            name.setText(account.getName());
+            lastname.setText(account.getLastname());
+            email.setText(account.getEmail());
+        }
+
 
 
     }
