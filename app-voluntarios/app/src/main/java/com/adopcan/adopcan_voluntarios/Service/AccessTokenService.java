@@ -34,8 +34,8 @@ public class AccessTokenService {
         params.put("client_id", "android");
         params.put("client_secret", "$2y$10$i7jFI84uPuuzqbAT.tJyb.h1xggXRVK3Onj8XpLGhdOzfKhhcReiC");
         params.put("scope", "default");
-        params.put("username", "ong@yopmail.com");
-        params.put("password", "12345678");
+        params.put("username", username);
+        params.put("password", pass);
 
         String url = "http://www.adopcan.com/api/access_token";
 

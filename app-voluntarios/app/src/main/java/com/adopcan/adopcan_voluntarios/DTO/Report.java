@@ -41,7 +41,7 @@ public class Report implements Serializable{
 
     private byte[] photoByte;
 
-    private boolean shareFacebook;
+    private boolean shareFacebook = false;
 
     public String getId() {
         return id;

@@ -71,7 +71,7 @@ public class DogsActivity extends AppCompatActivity implements  Response.ErrorLi
     private void initListDog(){
         dogService = new DogService();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Request<?> request = dogService.getDogs(false,this, this);
+        Request<?> request = dogService.getDogs(false,"",this, this);
         AppController.getInstance().addToRequestQueue(request);
 
     }

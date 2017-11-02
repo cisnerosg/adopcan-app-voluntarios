@@ -183,7 +183,7 @@ public class OrganizationActivity extends AppCompatActivity implements  Response
             TextView orgWeb = (TextView)view.findViewById(R.id.org_webSite);
             orgName.setText(organizaciones.get(i).getName());
             orgDir.setText(organizaciones.get(i).getAddress());
-            orgWeb.setText(organizaciones.get(i).getWeb());
+            orgWeb.setText(organizaciones.get(i).getTelephone());
 
             Button button = (Button)view.findViewById(R.id.seleccionar_organizacion);
             button.setOnClickListener(new View.OnClickListener() {

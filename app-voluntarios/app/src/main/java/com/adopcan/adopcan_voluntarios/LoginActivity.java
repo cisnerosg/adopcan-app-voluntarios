@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.AppController;
 import com.adopcan.adopcan_voluntarios.CustomHttpRequest.DefaultExclusionStrategy;
+import com.adopcan.adopcan_voluntarios.DTO.Account;
 import com.adopcan.adopcan_voluntarios.DTO.OrganizationTemp;
 import com.adopcan.adopcan_voluntarios.DTO.User;
 import com.adopcan.adopcan_voluntarios.DTO.UserType;
@@ -118,6 +119,9 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
                     };
                     user = new User();
                     user.addFacebookToken(loginResult.getAccessToken().getToken());
+                    Account account = new Account();
+                    account.setUserTypeId(3);
+                    user.setAccount(account);
                     SecurityHandler.getInstance(user);
                     AccessTokenService accessTokenService = new AccessTokenService();
                     Request<?> request = accessTokenService.getAccessTokenFB(loginResult.getAccessToken().getToken(), responseListener, errorListener);

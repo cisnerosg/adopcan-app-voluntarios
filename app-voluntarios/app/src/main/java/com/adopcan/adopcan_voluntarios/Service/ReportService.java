@@ -70,8 +70,6 @@ public class ReportService {
     private VolleyMultipartRequest sendReport(final Report report, String url, final boolean withImage) {
         // loading or check internet connection or something...
         // ... then
-        report.setShareFacebook(true);
-
         VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {

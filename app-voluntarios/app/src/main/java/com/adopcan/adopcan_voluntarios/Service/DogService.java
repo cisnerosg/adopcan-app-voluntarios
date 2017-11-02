@@ -31,16 +31,25 @@ public class DogService {
         return dogs;
     }
 
-    public StringRequest getDogs(boolean favorite,Response.Listener<String> responseListener, Response.ErrorListener errorListener) {
+    public StringRequest getDogs(boolean favorite,String filter,Response.Listener<String> responseListener, Response.ErrorListener errorListener) {
         List<Dog> list = new ArrayList<>();
 
         OrganizationTemp org = SecurityHandler.getSecurity().getUser().getOrganization();
         String favoriteParam = "";
-
+        String nameParam = "";
         if(favorite){
-            favoriteParam = "favoritos=1";
+            favoriteParam = "favoritos=1/";
         }
-        String url = "http://www.adopcan.com/api/"+ org.getId() +"/animales?" + favoriteParam;
+
+        if(!filter.equals("")){
+            if(favoriteParam.equals("")){
+                nameParam = "nombre=" + filter;
+            }else{
+                nameParam = "&& nombre=" + filter;
+            }
+
+        }
+        String url = "http://www.adopcan.com/api/"+ org.getId() +"/animales?" + favoriteParam + nameParam;
 
         HttpMethod httpMethod = new HttpMethod();
         return httpMethod.httpGetMethod(url,responseListener, errorListener);

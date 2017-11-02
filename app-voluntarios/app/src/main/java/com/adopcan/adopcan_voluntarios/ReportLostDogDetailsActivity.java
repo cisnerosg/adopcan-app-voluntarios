@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -77,19 +78,15 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
         alertDialog = new com.adopcan.adopcan_voluntarios.Utils.AlertDialog();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_lost_dog_details);
-        TextView toggleButtonView = (TextView) findViewById(R.id.toggleButtonFB);
-        TextView textViewCompartir = (TextView) findViewById(R.id.compartirText);
-        TextView textViewFacebook = (TextView) findViewById(R.id.facebookText);
-        /*if(Profile.getCurrentProfile() != null){
-            toggleButtonView.setVisibility(View.VISIBLE);
-            textViewCompartir.setVisibility(View.VISIBLE);
-            textViewFacebook.setVisibility(View.VISIBLE);
+        LinearLayout linearFacebook = (LinearLayout) findViewById(R.id.linear_facebook);
+        //TextView textViewCompartir = (TextView) findViewById(R.id.compartirText);
+        //TextView textViewFacebook = (TextView) findViewById(R.id.facebookText);
+        if(Profile.getCurrentProfile() != null){
+            linearFacebook.setVisibility(View.VISIBLE);
         } else {
-            toggleButtonView.setVisibility(View.INVISIBLE);
-            textViewCompartir.setVisibility(View.INVISIBLE);
-            textViewFacebook.setVisibility(View.INVISIBLE);
+            linearFacebook.setVisibility(View.INVISIBLE);
         }
-        */
+
 
     }
 
@@ -114,10 +111,16 @@ public class ReportLostDogDetailsActivity extends AppCompatActivity {
     public void sendReport(View view){
 
         String description = ((EditText)findViewById(R.id.editText_description)).getText().toString();
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButtonFB);
 
         if(description.equals("")){
             alertDialog.showAlertWithAcept(this, "Alerta", "Tenés que agregar un comentanrio, acordate que mientras mas describas más fácil lo podrán reconocer");
         }else {
+
+            if(toggle.getVisibility() == View.VISIBLE && toggle.isChecked()){
+                report.setShareFacebook(true);
+            }
+
             report.setDescription(description);
             report.setState(State.ACTIVE.getId());
             ReportService reportService = new ReportService();

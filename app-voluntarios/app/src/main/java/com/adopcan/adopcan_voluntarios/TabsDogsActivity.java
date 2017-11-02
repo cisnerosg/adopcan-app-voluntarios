@@ -107,7 +107,7 @@ public class TabsDogsActivity extends AppCompatActivity  implements  Response.Er
 
             TextView filter = (TextView) findViewById(R.id.editText_filter);
 
-            Request<?> request = dogService.getDogs(favorites,this, this);
+            Request<?> request = dogService.getDogs(favorites,filter.getText().toString(),this, this);
             AppController.getInstance().addToRequestQueue(request);
         }else{
             Intent intent = new Intent(this, LoginActivity.class);
