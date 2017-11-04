@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
@@ -42,5 +43,24 @@ public class DogDetailActivity extends AppCompatActivity {
     private void loadFicha(DogTemp dog){
         ImageView imageView = (ImageView) findViewById(R.id.imageView5);
         Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + dog.getFilename()).transform(new Circle()).into(imageView);
+
+        TextView textName = (TextView) findViewById(R.id.textView_name);
+        TextView textSexo = (TextView) findViewById(R.id.text_sexo);
+        TextView textEdad = (TextView) findViewById(R.id.text_edad);
+        TextView textFecha = (TextView) findViewById(R.id.text_fecha);
+        TextView textColor = (TextView) findViewById(R.id.text_color);
+        TextView textDieta = (TextView) findViewById(R.id.text_dieta);
+
+        textName.setText(dog.getName());
+        if(dog.getSex() != "1"){
+            textSexo.setText("Hembra");
+        } else {
+            textSexo.setText("Macho");
+        }
+        textFecha.setText(dog.getAdmissionDate());
+        textEdad.setText(dog.getEdad());
+        textDieta.setText(dog.getDiet());
+        textColor.setText(dog.getColor());
+
     }
 }
