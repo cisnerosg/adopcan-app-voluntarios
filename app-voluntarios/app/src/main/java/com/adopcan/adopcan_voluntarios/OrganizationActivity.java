@@ -78,6 +78,7 @@ public class OrganizationActivity extends AppCompatActivity implements  Response
                 Account account = json.fromJson(response,Account.class);
 
                 SecurityHandler.getSecurity().getUser().setAccount(account);
+                SecurityHandler.getSecurity().getUser().setCountOrganization(organizaciones.size());
 
                 Intent intent = new Intent(getApplicationContext(), SolapaActivity.class);
                 startActivity(intent);

@@ -67,9 +67,14 @@ public class SolapaActivity extends AppCompatActivity
 
         if(!isVoluntary) {
             nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
+
             nav_Menu.findItem(R.id.nav_organization).setVisible(false);
             nav_Menu.findItem(R.id.nav_dogs2).setVisible(false);
             nav_Menu.findItem(R.id.nav_calendar).setVisible(false);
+        }
+
+        if(SecurityHandler.getSecurity().getUser().getCountOrganization()==1){
+            nav_Menu.findItem(R.id.nav_organization).setVisible(false);
         }
     }
 

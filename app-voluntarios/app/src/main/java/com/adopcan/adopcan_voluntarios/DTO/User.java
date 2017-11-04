@@ -16,6 +16,7 @@ public class User {
     private String facebookToken;
     private OrganizationTemp organization;
     private Account account;
+    private int countOrganization =1;
 
     public User(){}
 
@@ -75,5 +76,13 @@ public class User {
 
     public void setFacebookToken(String facebookToken) {
         this.facebookToken = facebookToken;
+    }
+
+    public int getCountOrganization() {
+        return countOrganization;
+    }
+
+    public void setCountOrganization(int countOrganization) {
+        this.countOrganization = countOrganization;
     }
 }
