@@ -56,7 +56,11 @@ public class SolapaActivity extends AppCompatActivity
     private void customMenu()
     {
 
-        boolean isVoluntary = !SecurityHandler.getSecurity().getUser().getAccount().getUserType().equals(UserType.SIMPLE); //Si tiene security y si no está logueado con facebook
+        boolean isVoluntary = false;
+        if(SecurityHandler.getSecurity() != null && Profile.getCurrentProfile() == null){ //Si tiene security y si no está logueado con facebook
+            isVoluntary = !SecurityHandler.getSecurity().getUser().getAccount().getUserType().equals(UserType.SIMPLE);
+        }
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
