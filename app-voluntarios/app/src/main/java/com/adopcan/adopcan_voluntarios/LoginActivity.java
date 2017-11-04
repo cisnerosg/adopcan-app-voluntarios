@@ -176,9 +176,6 @@ public class LoginActivity extends AppCompatActivity implements Response.ErrorLi
     @Override
     public void onErrorResponse(VolleyError error) {
 
-        Intent intent = new Intent(this, SolapaActivity.class);
-        startActivity(intent);
-
         if (error == null || error.networkResponse == null) {
             return;
         }
