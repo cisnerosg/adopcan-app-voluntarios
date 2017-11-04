@@ -31,6 +31,7 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -122,6 +123,7 @@ public class CalendarActivity extends AppCompatActivity implements  Response.Err
 
         try {
             listCalendar= getListFromJson(response);
+            filterListCalendar();
             ListView listView = (ListView)findViewById(R.id.listView_calendar);
             CustomAdapter customAdapter = new CustomAdapter();
             listView.setAdapter(customAdapter);
@@ -153,6 +155,30 @@ public class CalendarActivity extends AppCompatActivity implements  Response.Err
         Gson gson = new GsonBuilder().create();
         Type typeOfList = new TypeToken<List<CalendarInfo>>(){}.getType();
         return gson.fromJson(json, typeOfList);
+    }
+
+    private void filterListCalendar() throws ParseException {
+        List<CalendarInfo> aux = new ArrayList<>();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR,-1);
+
+        Date fechaHoy = calendar.getTime();
+
+        for(CalendarInfo info : listCalendar){
+
+            Date dateInfo = formatter.parse(info.getDate());
+
+            if(dateInfo.compareTo(fechaHoy)< 0 ){
+                aux.add(info);
+            }
+
+        }
+
+        listCalendar.removeAll(aux);
+
     }
 
 }
