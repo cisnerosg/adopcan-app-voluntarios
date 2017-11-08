@@ -120,8 +120,13 @@ public class ReportService {
     }
 
     private String getCoords(Report report){
-        String lat = Double.toString(report.getLatitude());
-        String lon = Double.toString(report.getLongitude());
+        Double corrimiento = 0.00001;
+
+        Double latTocada = report.getLatitude() + corrimiento;
+        Double lonTocada = report.getLongitude() + corrimiento;
+
+        String lat = Double.toString(latTocada);
+        String lon = Double.toString(lonTocada);
 
         return lat + "," + lon;
     }

@@ -267,9 +267,8 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
     public void showAlertWithAceptAndCancel(Context context, String title, String description) {
 
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
-        builder.setTitle(title).
-
-                setMessage(description)
+        builder.setTitle(title)
+                .setMessage(description)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick (DialogInterface dialog,int which){
                         //cambiar estado
@@ -296,7 +295,7 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
             public void onClick (DialogInterface dialog,int which){
                 // do nothing
             }
-        }).setIcon(android.R.drawable.ic_dialog_alert)
+        }).setIcon(R.drawable.warning)
                 .show();
     }
 
