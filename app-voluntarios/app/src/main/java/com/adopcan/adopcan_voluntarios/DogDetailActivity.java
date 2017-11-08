@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.adopcan.adopcan_voluntarios.DTO.DogTemp;
 import com.adopcan.adopcan_voluntarios.DTO.Report;
 import com.adopcan.adopcan_voluntarios.Utils.Circle;
+import com.adopcan.adopcan_voluntarios.Utils.DateUtils;
 import com.squareup.picasso.Picasso;
+
+import java.util.Date;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -44,7 +47,7 @@ public class DogDetailActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.imageView5);
         Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + dog.getFilename()).transform(new Circle()).into(imageView);
 
-        TextView textName = (TextView) findViewById(R.id.textView_name);
+        TextView textName = (TextView) findViewById(R.id.textView2);
         TextView textSexo = (TextView) findViewById(R.id.text_sexo);
         TextView textEdad = (TextView) findViewById(R.id.text_edad);
         TextView textFecha = (TextView) findViewById(R.id.text_fecha);
@@ -52,15 +55,47 @@ public class DogDetailActivity extends AppCompatActivity {
         TextView textDieta = (TextView) findViewById(R.id.text_dieta);
 
         textName.setText(dog.getName());
+        String sexo = "Sexo: ";
         if(dog.getSex() != "1"){
-            textSexo.setText("Hembra");
+            sexo += "Hembra";
         } else {
-            textSexo.setText("Macho");
+            sexo += "Macho";
         }
-        textFecha.setText(dog.getAdmissionDate());
-        textEdad.setText(dog.getEdad());
-        textDieta.setText(dog.getDiet());
-        textColor.setText(dog.getColor());
+        textSexo.setText(sexo);
+
+        String fechaIngreso = "Fecha Ingreso: ";
+        if(dog.getAdmissionDate()== null){
+            fechaIngreso += "No registrada";
+        }else{
+            DateUtils dateUtils = new DateUtils();
+            Date date = dateUtils.getDateByString(dog.getAdmissionDate());
+            fechaIngreso += dateUtils.getDate(date);
+        }
+        textFecha.setText(fechaIngreso);
+
+        String edad = "Edad: ";
+        if(dog.getEdad()== null){
+            edad += "No registrada";
+        }else{
+            edad += dog.getEdad();
+        }
+        textEdad.setText(edad);
+
+        String diet = "Dieta: ";
+        if(dog.getDiet()== null){
+            diet += "No registrada";
+        }else{
+            diet += dog.getDiet();
+        }
+        textDieta.setText(diet);
+
+        String color = "Color: ";
+        if(dog.getColor()== null){
+            color += "No registrada";
+        }else{
+            color += dog.getColor();
+        }
+        textColor.setText(color);
 
     }
 }

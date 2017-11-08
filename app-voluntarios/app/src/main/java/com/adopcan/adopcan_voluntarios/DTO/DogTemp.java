@@ -31,7 +31,7 @@ public class DogTemp implements Serializable {
     private String needs;
     @SerializedName("dieta")
     private String diet;
-    @SerializedName("fechaIngreso")
+    @SerializedName("fecha_ingreso")
     private String admissionDate;
     @SerializedName("notas")
     private String notes;
@@ -126,14 +126,6 @@ public class DogTemp implements Serializable {
         this.diet = diet;
     }
 
-    public String getAdmissionDate() {
-        return admissionDate;
-    }
-
-    public void setAdmissionDate(String admissionDate) {
-        this.admissionDate = admissionDate;
-    }
-
     public String getNotes() {
         return notes;
     }
@@ -152,5 +144,13 @@ public class DogTemp implements Serializable {
 
     public boolean isFavorite(){
         return favorite == 1;
+    }
+
+    public String getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public void setAdmissionDate(String admissionDate) {
+        this.admissionDate = admissionDate;
     }
 }

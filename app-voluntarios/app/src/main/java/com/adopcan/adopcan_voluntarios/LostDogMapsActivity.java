@@ -150,9 +150,9 @@ public class LostDogMapsActivity extends AppCompatActivity implements OnMapReady
             return null;
         }
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         Ubication ubication = updateUbication(location);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,20000,0,locListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,20000,0,locListener);
         return ubication;
 
     }

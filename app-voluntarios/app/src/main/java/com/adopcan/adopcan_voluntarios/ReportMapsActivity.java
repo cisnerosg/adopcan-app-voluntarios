@@ -119,9 +119,9 @@ public class ReportMapsActivity extends AppCompatActivity implements OnMapReadyC
             return;
         }
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         updateUbication(location);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,20000,0,locListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,20000,0,locListener);
 
 
     }
