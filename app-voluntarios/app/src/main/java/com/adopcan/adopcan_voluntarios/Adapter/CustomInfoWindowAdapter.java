@@ -76,8 +76,12 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
             TextView date = (TextView) ((Activity) tag.getContext()).findViewById(R.id.textView_date);
             DateUtils dateUtils = new DateUtils();
-            date.setText("Reportado el " + dateUtils.getDateDescription(new Date()));
-
+            if (report.getCreatedAt() != null){
+            Date dateReport = dateUtils.getDateByString(report.getCreatedAt());
+            date.setText("Reportado el " + dateUtils.getDateDescription(dateReport));
+            }else{
+                date.setText("Reportado el " + dateUtils.getDateDescription(new Date()));
+            }
             ImageView imageView = (ImageView) ((Activity) tag.getContext()).findViewById(R.id.imageView_dog);
             Picasso.with(getApplicationContext()).load("http://www.adopcan.com/uploads/" + report.getFilename()).transform(new Circle()).into(imageView);
 
