@@ -28,7 +28,7 @@
         android:id="@+id/textView14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Juntos lograremos que mas perros encuentren un hogar"
+        android:text="Recordá... no comprés, mejor ADOPCAN"
         android:textSize="20dp"
         android:textStyle="bold"
         android:gravity="center"
